@@ -37,7 +37,8 @@
 .shop .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--ink);background:var(--gold);border-radius:999px;padding:3px 10px;margin-bottom:10px}
 .shop .acts{display:grid;gap:8px;justify-items:end}
 .shop .acts a:not(.btn){color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
-.results .proto{font-size:14px;color:#9a9a9a;border-top:1px solid var(--line);padding-top:16px}
+.loc-map{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;background:#e9e9e6}
+.loc-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 @media (max-width:900px){.loc .wrap{grid-template-columns:1fr}}
 @media (max-width:560px){.shop{grid-template-columns:1fr}.shop .acts{justify-items:start;grid-auto-flow:column;justify-content:start;gap:16px;align-items:center}}
 @media (prefers-reduced-motion:reduce){.shop{animation:none;opacity:1;transform:none}}
@@ -234,12 +235,13 @@
 <script>
 (() => {
 'use strict';
-/* Prototype data. On the live site these lists and shops come from the store database
-   (the same one the current buycav.in/locate-us form reads). Only BOSYM's own address is real here. */
+/* Showrooms. CAV has one showroom for now, so the form opens on it; new showrooms go into this list
+   (or come from the store database the live buycav.in/locate-us form reads). */
 const SHOPS = {
   India: { Kerala: { Ernakulam: { Edappally: [
-    { name: 'BOSYM Pvt Ltd', tag: 'Head office', addr: '2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024',
-      phone: '+91 484 316 0620', map: 'https://www.google.com/maps/search/?api=1&query=Manglavil+Apartments+Edappally+Kochi' },
+    { name: 'BOSYM Pvt Ltd', tag: 'Showroom', addr: '2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024',
+      phone: '+91 484 316 0620', map: 'https://www.google.com/maps/search/?api=1&query=Manglavil+Apartments+Edappally+Kochi',
+      embed: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.7875631403817!2d76.31393727629215!3d10.03438157243958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080db4c5ca367f%3A0x2e2fab4c085c29cf!2sManglavil%20Apartments!5e0!3m2!1sen!2sin!4v1693905460877!5m2!1sen!2sin' },
   ] } } },
 };
 const sels = ['c_name', 's_name', 'd_name', 'p_name'].map(id => $('#' + id));
@@ -258,20 +260,28 @@ sels.forEach((sel, i) => sel.addEventListener('change', () => {
   go.disabled = !sels.every(s => s.value);
 }));
 const esc2 = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-$('#loc-form').addEventListener('submit', e => {
-  e.preventDefault();
+const render = quiet => {
   if (!sels.every(s => s.value)) return;
   const list = level(4) || [];
   const place = sels.slice(1).map(s => s.value).reverse().join(', ');
   out.innerHTML = `<div><h3>CAV shops in ${esc2(sels[3].value)}</h3><p class="meta">${list.length} ${list.length === 1 ? 'result' : 'results'} · ${esc2(place)}</p></div>`
-    + list.map((s, i) => `<article class="shop" style="--i:${i}">
+    + list.map((s, i) => `${s.embed ? `<div class="loc-map" style="--i:${i}"><iframe title="Map: ${esc2(s.name)}, ${esc2(sels[3].value)}" src="${s.embed}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>` : ''}
+      <article class="shop" style="--i:${i}">
         <div>${s.tag ? `<span class="tag">${esc2(s.tag)}</span>` : ''}<b>${esc2(s.name)}</b><address>${esc2(s.addr)}</address></div>
         <div class="acts"><a class="btn btn-white btn-sm" href="tel:${s.phone.replace(/\s/g, '')}">Call ${esc2(s.phone)}</a><a href="${s.map}" target="_blank" rel="noopener">Directions ↗</a></div>
-      </article>`).join('')
-    + `<p class="proto">Prototype: this list will show every CAV shop from the live store database.</p>`;
+      </article>`).join('');
+  if (quiet) return;
   out.focus({ preventScroll: true });
   if (innerWidth <= 900) out.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+};
+$('#loc-form').addEventListener('submit', e => { e.preventDefault(); render(); });
+// one showroom for now: open with every field already chosen and its result shown
+sels.forEach((sel, i) => {
+  if (sel.options.length === 2) sel.value = sel.options[1].value;
+  if (i < 3 && sel.value) fill(sels[i + 1], Object.keys(level(i + 1)));
 });
+go.disabled = !sels.every(s => s.value);
+render(true);
 })();
 </script>
 </body>
