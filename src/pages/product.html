@@ -5,7 +5,7 @@
 .bc li+li::before{content:"›";margin-right:10px}
 .bc a{transition:color .2s}
 .bc a:hover,.bc [aria-current]{color:#fff}
-.pd{padding-block:24px clamp(72px,7vw,104px)}
+.pd{padding-block:clamp(32px,3.4vw,48px) clamp(72px,7vw,104px)}
 .pd .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.4vw,64px);align-items:start}
 .gal{display:grid;gap:14px}
 .stage{position:relative;aspect-ratio:1;border-radius:24px;background:#f4f4f2;overflow:hidden;touch-action:pan-y;cursor:zoom-in}
@@ -102,8 +102,6 @@ const related = CATALOG.filter(x => x.s !== it.s && x.g === it.g && x.shape === 
 if (related.length < 4) related.push(...CATALOG.filter(x => x.s !== it.s && x.g === it.g && !related.includes(x)).slice(0, 4 - related.length));
 
 root.innerHTML = `
-<nav class="bc wrap" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="shop.html?cat=frames">${esc(it.cat)}</a></li><li><span aria-current="page">${esc(it.n)}</span></li></ol></nav>
-
 <section class="pd" aria-label="${esc(it.n)}">
   <div class="wrap">
     <div class="gal" aria-roledescription="carousel" aria-label="Photos of ${esc(it.n)}">
