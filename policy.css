@@ -45,11 +45,11 @@ code{font:600 14px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;background:#f
 .btn{border:0;border-radius:999px;background:#fff;color:var(--ink);font-weight:700;font-size:15px;padding:12px 20px;transition:background-color .2s}
 .btn:hover{background:var(--gold)}
 button.inline{background:none;border:0;padding:0;font-weight:700;color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(179,38,30,.4)}
-.ph-foot{background:var(--red);color:#fff;margin-top:40px}
+.ph-foot{background:var(--black);color:#fff;margin-top:40px}
 .ph-foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:28px}
 .ph-foot nav{display:flex;flex-wrap:wrap;gap:4px 20px}
 .ph-foot nav a,.ph-foot nav button{background:none;border:0;padding:0;color:#fff;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4)}
 .ph-foot nav a[aria-current]{text-decoration-color:#fff}
-.ph-foot small{font-size:14px;color:#ffd0cb}
+.ph-foot small{font-size:14px;color:#9a9a9a}
 .ph-foot :focus-visible{outline-color:var(--gold)}
 @media (max-width:640px){.toc ol{columns:1}th,td{padding:10px 12px}}

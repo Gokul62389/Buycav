@@ -166,7 +166,7 @@ body.lock{overflow:hidden}
 /* ---------- 8 · category tiles ---------- */
 .cats{padding-block:clamp(72px,7.8vw,112px)}
 .cats .h2{margin-bottom:48px}
-.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .tile{position:relative;display:grid;gap:20px;align-content:start}
 .tile .media{position:relative;aspect-ratio:432/560;border-radius:20px;overflow:hidden;background:#222;isolation:isolate}
 .tile .media>img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
@@ -174,11 +174,11 @@ body.lock{overflow:hidden}
 .tile .shade{position:absolute;inset:0;background:rgba(0,0,0,.35);opacity:0;transition:opacity .5s var(--ease);pointer-events:none}
 .tile .chip{position:absolute;right:14px;top:14px;z-index:2;display:none;align-items:center;gap:6px;background:rgba(11,11,11,.72);color:#fff;font-size:13px;font-weight:700;padding:7px 12px;border-radius:999px;pointer-events:none;transition:opacity .3s}
 .glance{position:absolute;left:16px;right:16px;bottom:16px;z-index:3;display:flex;align-items:center;gap:16px;background:#fff;color:var(--ink);border-radius:16px;padding:14px;opacity:0;transform:translateY(calc(100% + 24px));transition:opacity .35s,transform .55s var(--ease);visibility:hidden}
-.glance .ph{width:150px;aspect-ratio:150/112;flex:none;border-radius:12px;background:var(--tile);overflow:hidden}
+.glance .ph{width:104px;aspect-ratio:104/78;flex:none;border-radius:12px;background:var(--tile);overflow:hidden}
 .glance .ph img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);mix-blend-mode:multiply}
 .glance .info{display:grid;gap:4px;justify-items:start;min-width:0}
 .glance small{font-size:13px;font-weight:700;color:var(--grey)}
-.glance b{font:700 26px/1.05 var(--d);letter-spacing:-.015em}
+.glance b{font:700 22px/1.05 var(--d);letter-spacing:-.015em}
 .glance b a:hover{text-decoration:underline;text-underline-offset:3px}
 .glance span{font-size:15px;color:var(--grey)}
 .glance .btn{margin-top:6px;padding:8px 16px}
@@ -191,8 +191,9 @@ body.lock{overflow:hidden}
   .tile:hover .media>img{transform:scale(1.04)}
 }
 @media (hover:none){.tile .chip{display:inline-flex}.tile.is-open .chip{opacity:0}}
-.tile .tfoot{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.tile h3{font:700 40px/1.2 var(--d);letter-spacing:-.02em}
+/* name above the link, so the longer hover link never collides on narrow tiles */
+.tile .tfoot{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.tile h3{font:700 36px/1.2 var(--d);letter-spacing:-.02em}
 .tile .more{font-size:16px;font-weight:700;color:var(--gold);white-space:nowrap}
 .tile .more .all{display:none}
 .tile.is-open .more .one,.tile:focus-within .more .one{display:none}
@@ -296,11 +297,11 @@ html:not(.js) .tabs button[aria-selected=true]{background:var(--red)}
 .feat-i p a:hover{color:var(--red)}
 
 /* ---------- 12 + 13 · footer ---------- */
-.foot{background:var(--red);padding-top:80px}
+.foot{background:var(--black);padding-top:80px}
 .foot .cols{display:grid;grid-template-columns:minmax(0,520px) minmax(0,416px) minmax(0,312px);gap:48px;justify-content:space-between}
 .foot .tag{font:700 36px/1.05 var(--d);letter-spacing:-.02em}
 .foot h3{font-size:16px;font-weight:700;line-height:1.6;margin-bottom:10px}
-.foot address{font-style:normal;color:#ffe1dd;line-height:1.6;display:grid;gap:2px}
+.foot address{font-style:normal;color:#bdbdbd;line-height:1.6;display:grid;gap:2px}
 .foot address a{transition:color .2s}
 .foot address a:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .social{display:flex;gap:10px;margin-top:4px}
@@ -308,8 +309,8 @@ html:not(.js) .tabs button[aria-selected=true]{background:var(--red)}
 .social a:hover{background:var(--gold);transform:translateY(-3px)}
 .social svg{width:20px;height:20px}
 .band{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-block:64px 40px}
-.band img{width:264px;height:auto}
-.band small{font-size:14px;line-height:1.6;color:#ffd0cb}
+.band img{width:160px;height:auto}
+.band small{font-size:14px;line-height:1.6;color:#9a9a9a}
 .legal{display:grid;gap:6px;justify-items:end;text-align:right}
 .legal nav{display:flex;flex-wrap:wrap;gap:4px 20px}
 .legal nav a,.legal nav button{color:#fff;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4);transition:text-decoration-color .2s}
@@ -339,14 +340,11 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .foot .cols{grid-template-columns:1fr 1fr 1fr}
 }
 @media (max-width:1023px){
-  /* tablet: three narrower columns, no sideways scrolling */
-  .tiles{gap:16px}
+  /* tablet: two by two, no sideways scrolling */
+  .tiles{grid-template-columns:repeat(2,1fr);gap:24px 16px}
   .tile{gap:12px}
-  .tile h3{font-size:28px}
-  .tile .tfoot{flex-direction:column;align-items:flex-start;gap:2px}
-  .glance{left:10px;right:10px;bottom:10px;padding:12px}
-  .glance .ph{display:none}
-  .glance b{font-size:20px}
+  .tile h3{font-size:30px}
+  .glance{left:12px;right:12px;bottom:12px;padding:12px}
   .count .wrap{grid-template-columns:1fr;gap:40px}
   .latest .wrap{grid-template-columns:1fr;gap:24px}
   .latest .side{position:static}
@@ -393,7 +391,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .foot .cols{grid-template-columns:1fr;gap:36px}
   .foot .tag{font-size:30px}
   .band{flex-direction:column;align-items:flex-start;padding-block:48px 32px}
-  .band img{width:200px}
+  .band img{width:140px}
 }
 /* phone: one column of shorter landscape cards, cropped to the faces */
 @media (max-width:640px){
@@ -401,7 +399,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .tiles{grid-template-columns:1fr;gap:28px}
   .tile .media{aspect-ratio:16/10}
   .tile .media>img{object-position:50% 22%}
-  .tile .tfoot{flex-direction:row;align-items:center}
+  .tile .tfoot{flex-direction:row;align-items:center;justify-content:space-between}
   .tile h3{font-size:30px}
 }
 @media (max-width:560px){
@@ -498,6 +496,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
         <option value="men">Men</option>
         <option value="women">Women</option>
         <option value="unisex">Unisex</option>
+        <option value="kids">Kids</option>
       </select>
       <svg class="ico"><use href="#i-down"/></svg>
     </span>
@@ -657,6 +656,27 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
           <a class="more" href="https://buycav.in/product-category/frames-for-eye-glass/"><span class="one">View frames</span><span class="all">View all unisex frames</span> <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </article>
+      <article class="tile rv" style="--dl:3">
+        <div class="media">
+          <img src="img/cat-kids.webp" alt="Boy wearing black CAV frames" width="900" height="1200" loading="lazy">
+          <button class="peek" aria-expanded="false" aria-controls="g-kids" aria-label="Show the top pick for kids"></button>
+          <span class="shade"></span>
+          <span class="chip" aria-hidden="true">+ Top pick</span>
+          <div class="glance" id="g-kids">
+            <div class="ph"><img src="img/p/128A.jpg" alt="" loading="lazy"></div>
+            <div class="info">
+              <small>Top pick for kids</small>
+              <b><a href="https://buycav.in/product/cc-059-brown/">CC 059</a></b>
+              <span>Brown</span>
+              <a class="btn btn-red btn-sm" href="https://buycav.in/locate-us/">Shop At</a>
+            </div>
+          </div>
+        </div>
+        <div class="tfoot">
+          <h3>Kids</h3>
+          <a class="more" href="https://buycav.in/product-category/frames-for-eye-glass/"><span class="one">View frames</span><span class="all">View all kids frames</span> <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -786,7 +806,7 @@ const P = {
   '32A':  ['CL 2015', 'Green brown', '#4c5a3a', 'cl-2015-green-brown', 'men'],
   '64A':  ['CC 606', 'Red black', '#8e2a2a', 'cc-606-red-black', 'men'],
   '96A':  ['CC 056', 'Brown', '#5a3a22', 'cc-056-brown', 'women'],
-  '128A': ['CC 059', 'Brown', '#5a3a22', 'cc-059-brown', 'unisex'],
+  '128A': ['CC 059', 'Brown', '#5a3a22', 'cc-059-brown', 'kids'],
   '160A': ['CE 003', 'Wellow wine', '#7d2233', 'ce-003-wellow-wine', 'men'],
   '192A': ['CS27G', 'Gun metal', '#55595a', 'cs27g-gun-metal', 'unisex'],
 };
@@ -1117,8 +1137,9 @@ sToggle.addEventListener('click', () => toggleSearch(!sMob.classList.contains('i
 /* ---- 279+ count-up ---- */
 {
   const n = $('.count .n'), to = +n.dataset.to;
-  n.style.minWidth = n.getBoundingClientRect().width + 'px';
-  document.fonts && document.fonts.ready.then(() => { n.style.minWidth = ''; n.style.minWidth = n.getBoundingClientRect().width + 'px'; });
+  // reserve the final width in em so it scales with the font on resize/rotate (no jump while counting)
+  const lock = () => { n.style.minWidth = ''; const w = n.getBoundingClientRect().width / parseFloat(getComputedStyle(n).fontSize); n.style.minWidth = w + 'em'; };
+  lock(); document.fonts && document.fonts.ready.then(lock);
   const io = new IntersectionObserver(([e]) => {
     if (!e.isIntersecting) return;
     io.disconnect();
