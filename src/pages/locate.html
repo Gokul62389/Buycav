@@ -1,0 +1,120 @@
+<!--{"title": "Shop At · Find a CAV shop · CAV", "desc": "Find a CAV eyewear shop near you: choose your country, state, district and place.", "preload": "img/hero-trend.webp", "nav": "locate.html"}-->
+<style>/* ---------- Shop At (store locator) ---------- */
+.loc{padding-block:clamp(80px,9vw,128px)}
+.loc .wrap{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:clamp(32px,4.4vw,64px);align-items:start}
+.loc h2{font:700 clamp(40px,4.45vw,64px)/.95 var(--d);letter-spacing:-.03em;margin-bottom:16px}
+.loc .lead{font-size:18px;line-height:1.6;color:#bdbdbd;margin-bottom:32px}
+.loc form{display:grid;gap:18px}
+.loc .step{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:13px;font-weight:700;color:#9a9a9a;pointer-events:none}
+.loc .go{justify-self:start;margin-top:6px}
+.loc .go:disabled{opacity:.45;cursor:not-allowed}
+.results{min-height:420px;border-radius:24px;background:#151515;padding:clamp(24px,3vw,40px);display:grid;align-content:start;gap:20px}
+.results .empty{display:grid;justify-items:start;gap:16px;color:#bdbdbd;font-size:18px;line-height:1.6;max-width:440px}
+.results .empty svg{width:56px;height:56px;stroke:var(--gold);stroke-width:1.4;fill:none}
+.results h3{font:700 28px/1.1 var(--d);letter-spacing:-.015em}
+.results .meta{font-size:15px;color:#9a9a9a}
+.shop{display:grid;grid-template-columns:1fr auto;gap:16px 24px;align-items:start;background:#1f1f1f;border-radius:18px;padding:24px;opacity:0;transform:translateY(14px);animation:in .6s var(--ease) forwards;animation-delay:calc(var(--i)*80ms)}
+@keyframes in{to{opacity:1;transform:none}}
+.shop b{font:700 24px/1.15 var(--d);letter-spacing:-.01em;display:block;margin-bottom:6px}
+.shop address{font-style:normal;color:#bdbdbd;line-height:1.6}
+.shop .tag{display:inline-block;font-size:13px;font-weight:700;color:var(--ink);background:var(--gold);border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.shop .acts{display:grid;gap:8px;justify-items:end}
+.shop .acts a:not(.btn){color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+.results .proto{font-size:14px;color:#9a9a9a;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:900px){.loc .wrap{grid-template-columns:1fr}}
+@media (max-width:560px){.shop{grid-template-columns:1fr}.shop .acts{justify-items:start;grid-auto-flow:column;justify-content:start;gap:16px;align-items:center}}
+@media (prefers-reduced-motion:reduce){.shop{animation:none;opacity:1;transform:none}}
+</style>
+<!--MAIN-->
+<main id="main">
+
+<!-- Page title (live: "Shop At" + breadcrumb) -->
+<section class="pt" id="hero" aria-labelledby="pt-h1">
+  <div class="slide is-on">
+    <div class="media"><img src="img/hero-trend.webp" alt="Brown CAV CT 5419 frame on a dark stand" width="2000" height="1493" fetchpriority="high" style="object-position:50% 45%"></div>
+    <div class="scrim"></div>
+  </div>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Shop At</span></li></ol></nav>
+  <h1 class="word" id="pt-h1" aria-label="Shop At"><span aria-hidden="true"><span class="ch" style="--i:0">S</span><span class="ch" style="--i:1">h</span><span class="ch" style="--i:2">o</span><span class="ch" style="--i:3">p</span> <span class="ch" style="--i:5">A</span><span class="ch" style="--i:6">t</span></span></h1>
+</section>
+
+<!-- Live: Country → State → District → Place, then Submit -->
+<section class="loc" aria-labelledby="loc-h2">
+  <div class="wrap">
+    <div>
+      <h2 class="rv" id="loc-h2"><span class="mask"><span>Find a CAV shop near you</span></span></h2>
+      <p class="lead rv" style="--dl:1">Choose where you are, one step at a time.</p>
+      <form id="loc-form" class="rv" style="--dl:2" novalidate>
+        <div class="field">
+          <label for="c_name">Country Name</label>
+          <div style="position:relative"><select id="c_name" name="c_name" required><option value="">Select Country</option></select><span class="step" aria-hidden="true">1</span></div>
+        </div>
+        <div class="field">
+          <label for="s_name">State Name</label>
+          <div style="position:relative"><select id="s_name" name="s_name" required disabled><option value="">Select State</option></select><span class="step" aria-hidden="true">2</span></div>
+        </div>
+        <div class="field">
+          <label for="d_name">District Name</label>
+          <div style="position:relative"><select id="d_name" name="d_name" required disabled><option value="">Select District</option></select><span class="step" aria-hidden="true">3</span></div>
+        </div>
+        <div class="field">
+          <label for="p_name">Place Name</label>
+          <div style="position:relative"><select id="p_name" name="p_name" required disabled><option value="">Select Place Name</option></select><span class="step" aria-hidden="true">4</span></div>
+        </div>
+        <button class="btn btn-red btn-lg go" type="submit" disabled>Show shops <span class="arrow" aria-hidden="true">→</span></button>
+      </form>
+    </div>
+
+    <div class="results rv" style="--dl:2" id="results" aria-live="polite" tabindex="-1">
+      <div class="empty">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><path d="M28 50s16-13.8 16-26.6a16 16 0 0 0-32 0C12 36.2 28 50 28 50z"/><circle cx="28" cy="23.4" r="5.8"/></svg>
+        <p>Choose your country, state, district and place to see the CAV shops there.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<!--/MAIN-->
+<script>
+(() => {
+'use strict';
+/* Prototype data. On the live site these lists and shops come from the store database
+   (the same one the current buycav.in/locate-us form reads). Only BOSYM's own address is real here. */
+const SHOPS = {
+  India: { Kerala: { Ernakulam: { Edappally: [
+    { name: 'BOSYM Pvt Ltd', tag: 'Head office', addr: '2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024',
+      phone: '+91 484 316 0620', map: 'https://www.google.com/maps/search/?api=1&query=Manglavil+Apartments+Edappally+Kochi' },
+  ] } } },
+};
+const sels = ['c_name', 's_name', 'd_name', 'p_name'].map(id => $('#' + id));
+const go = $('#loc-form .go'), out = $('#results');
+const fill = (sel, keys) => {
+  sel.length = 1;
+  keys.sort().forEach(k => sel.add(new Option(k, k)));
+  sel.disabled = !keys.length;
+};
+const level = i => sels.slice(0, i).reduce((o, s) => o[s.value], SHOPS);
+fill(sels[0], Object.keys(SHOPS));
+sels.forEach((sel, i) => sel.addEventListener('change', () => {
+  // picking a level resets everything after it
+  sels.slice(i + 1).forEach(s => { s.length = 1; s.disabled = true; });
+  if (sel.value && i < 3) { fill(sels[i + 1], Object.keys(level(i + 1))); sels[i + 1].focus(); }
+  go.disabled = !sels.every(s => s.value);
+}));
+const esc2 = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+$('#loc-form').addEventListener('submit', e => {
+  e.preventDefault();
+  if (!sels.every(s => s.value)) return;
+  const list = level(4) || [];
+  const place = sels.slice(1).map(s => s.value).reverse().join(', ');
+  out.innerHTML = `<div><h3>CAV shops in ${esc2(sels[3].value)}</h3><p class="meta">${list.length} ${list.length === 1 ? 'result' : 'results'} · ${esc2(place)}</p></div>`
+    + list.map((s, i) => `<article class="shop" style="--i:${i}">
+        <div>${s.tag ? `<span class="tag">${esc2(s.tag)}</span>` : ''}<b>${esc2(s.name)}</b><address>${esc2(s.addr)}</address></div>
+        <div class="acts"><a class="btn btn-white btn-sm" href="tel:${s.phone.replace(/\s/g, '')}">Call ${esc2(s.phone)}</a><a href="${s.map}" target="_blank" rel="noopener">Directions ↗</a></div>
+      </article>`).join('')
+    + `<p class="proto">Prototype: this list will show every CAV shop from the live store database.</p>`;
+  out.focus({ preventScroll: true });
+  if (innerWidth <= 900) out.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'start' });
+});
+})();
+</script>

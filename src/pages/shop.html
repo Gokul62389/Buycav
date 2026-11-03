@@ -1,0 +1,253 @@
+<!--{"title": "Shop · CAV frames", "desc": "Browse CAV eyeglass frames by gender, colour, material and shape, then find them at a CAV shop near you.", "preload": "img/frames-panel.webp", "nav": "shop.html"}-->
+<style>/* ---------- Shop (product listing) ---------- */
+.shop{padding-block:clamp(40px,4.4vw,64px) clamp(80px,8.3vw,120px)}
+.shop-wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(32px,3.4vw,48px);align-items:start}
+.filters{position:sticky;top:24px;display:grid;gap:28px;max-height:calc(100vh - 48px);overflow:auto;padding:4px 8px 24px 4px;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.f-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.f-head h2{font:700 28px/1 var(--d);letter-spacing:-.015em}
+.f-clear{color:var(--gold);font-weight:700;font-size:15px;text-decoration:underline;text-underline-offset:3px}
+.f-clear[hidden]{display:none}
+.f-close,.f-apply,.f-open{display:none}
+.filters fieldset{border:0;margin:0;padding:0;display:grid;gap:2px;min-width:0}
+.filters legend{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a9a9a;margin-bottom:8px;padding:0}
+.opt{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:16px;color:#d9d9d9;transition:background-color .2s,color .2s}
+.opt:hover{background:#181818;color:#fff}
+.opt input{appearance:none;-webkit-appearance:none;margin:0;width:20px;height:20px;border-radius:6px;border:2px solid #5a5a5a;display:grid;place-items:center;flex:none;cursor:pointer;transition:background-color .2s,border-color .2s}
+.opt input:checked{background:var(--red);border-color:var(--red)}
+.opt input:checked::after{content:"";width:10px;height:5px;border:2px solid #fff;border-top:0;border-right:0;transform:translateY(-1px) rotate(-45deg)}
+.opt input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.opt .n{margin-left:auto;font-size:14px;color:#8a8a8a;font-variant-numeric:tabular-nums}
+.opt.is-zero{opacity:.38;cursor:default}
+.opt.is-zero:hover{background:none}
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;margin-bottom:20px}
+.rcount{font-size:15px;color:#bdbdbd;margin-right:auto}
+.rcount b{color:#fff}
+.tsel{appearance:none;-webkit-appearance:none;min-height:44px;padding:10px 42px 10px 18px;border-radius:999px;border:0;background:#1f1f1f url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23bbb' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='m2.5 4.5 3.5 3.5 3.5-3.5'/%3E%3C/svg%3E") no-repeat right 16px center;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+.tsel:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.chips:empty{display:none}
+.chip-x{display:inline-flex;align-items:center;gap:6px;background:#1f1f1f;color:#fff;border-radius:999px;padding:7px 8px 7px 16px;font-size:14px;font-weight:600;transition:background-color .2s}
+.chip-x:hover{background:#2c2c2c}
+.chip-x span{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#333;font-size:14px;line-height:1}
+.pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 24px}
+.pgrid>li{transition:opacity .3s,transform .45s var(--ease)}
+.pgrid.is-out>li{opacity:0;transform:translateY(10px)}
+.pgrid.is-in>li{opacity:0;transform:translateY(22px)}
+.pgrid.is-in.go>li{opacity:1;transform:none;transition-delay:calc(var(--i)*45ms)}
+.pgrid .card .ph{background:#f4f4f2}
+.pgrid .card .ph img{transition:opacity .45s,transform .7s var(--ease)}
+.pgrid .card .ph .alt{opacity:0}
+@media (hover:hover){.pgrid .card:hover .ph .alt{opacity:1}.pgrid .card:hover .ph .main{opacity:0}}
+.pgrid .card h3,.pgrid .card h3 a{color:#fff}
+.pgrid .sw{color:#bdbdbd}
+.pgrid .sw i{background:none;border:1.5px solid #777;width:10px;height:10px}
+.empty-r{display:grid;justify-items:start;gap:16px;padding:48px 0;color:#bdbdbd;font-size:18px}
+.empty-r b{font:700 32px/1.1 var(--d);color:#fff}
+.empty-r[hidden]{display:none}
+.pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:56px}
+.pager button{min-width:44px;height:44px;padding:0 14px;border-radius:999px;background:#1f1f1f;color:#fff;font-weight:700;font-size:15px;transition:background-color .2s}
+.pager button:hover:not(:disabled){background:#2c2c2c}
+.pager button[aria-current=page]{background:var(--red)}
+.pager button:disabled{opacity:.35;cursor:default}
+.pager .gap{align-self:center;color:#777;padding:0 4px}
+.f-veil{display:none}
+@media (max-width:1180px){.shop-wrap{grid-template-columns:230px minmax(0,1fr)}}
+@media (max-width:900px){
+  .shop-wrap{grid-template-columns:1fr}
+  .f-open{display:inline-flex}
+  .filters{position:fixed;z-index:61;top:0;right:0;bottom:0;width:min(420px,92vw);max-height:none;background:var(--black);border-left:1px solid var(--line);padding:20px 20px 0;align-content:start;transform:translateX(100%);visibility:hidden;transition:transform .5s var(--ease),visibility 0s .5s}
+  .filters.is-open{transform:none;visibility:visible;transition:transform .5s var(--ease)}
+  .f-close{display:grid}
+  .f-apply{display:flex;position:sticky;bottom:0;margin:0 -20px;padding:16px 20px max(16px,env(safe-area-inset-bottom));background:var(--black);border-top:1px solid var(--line)}
+  .f-apply .btn{flex:1}
+  .f-veil{display:block;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+  .f-veil.is-open{opacity:1;visibility:visible;transition:opacity .4s}
+}
+@media (max-width:767px){.pgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 14px}.pgrid .card .row{flex-direction:column;align-items:flex-start;gap:12px}.pgrid .card h3{font-size:19px}}
+</style>
+<!--MAIN-->
+<main id="main">
+
+<!-- Page title -->
+<section class="pt is-compact" id="hero" aria-labelledby="pt-h1">
+  <div class="slide is-on">
+    <div class="media"><img src="img/frames-panel.webp" alt="" width="1240" height="1240" fetchpriority="high" style="object-position:50% 50%;filter:brightness(.55)"></div>
+    <div class="scrim"></div>
+  </div>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Shop</span></li></ol></nav>
+  <h1 class="word" id="pt-h1" aria-label="Shop"><span aria-hidden="true"><span class="ch" style="--i:0">S</span><span class="ch" style="--i:1">h</span><span class="ch" style="--i:2">o</span><span class="ch" style="--i:3">p</span></span></h1>
+</section>
+
+<!-- Live: categories, Gender, Color, Material, Shape filters · sort · products per page · grid · pages -->
+<section class="shop" aria-label="Frames">
+  <div class="wrap shop-wrap">
+    <aside class="filters" id="filters" aria-label="Filters" tabindex="-1">
+      <div class="f-head">
+        <h2>Filters</h2>
+        <button class="f-clear" type="button" hidden>Clear all</button>
+        <button class="icon-btn f-close" type="button" aria-label="Close filters"><svg class="ico"><use href="#i-close"/></svg></button>
+      </div>
+      <div id="facets"></div>
+      <div class="f-apply"><button class="btn btn-red btn-lg" type="button">Show frames</button></div>
+    </aside>
+    <div class="f-veil" aria-hidden="true"></div>
+
+    <div>
+      <div class="toolbar">
+        <p class="rcount" id="rcount" aria-live="polite"></p>
+        <button class="btn btn-ghost btn-md f-open" type="button" aria-controls="filters" aria-expanded="false">Filters</button>
+        <label class="sr" for="sort">Sort frames</label>
+        <select class="tsel" id="sort">
+          <option value="default">Default sorting</option>
+          <option value="latest">Sort by latest</option>
+          <option value="az">Model: A to Z</option>
+          <option value="za">Model: Z to A</option>
+        </select>
+        <label class="sr" for="per">Frames per page</label>
+        <select class="tsel" id="per"><option value="12">12 per page</option><option value="24">24 per page</option><option value="48">48 per page</option></select>
+      </div>
+      <div class="chips" id="chips" aria-label="Active filters"></div>
+      <ul class="pgrid" id="pgrid"></ul>
+      <div class="empty-r" id="empty" hidden>
+        <b>No frames match these filters.</b>
+        <p>Try removing a filter, or clear them all.</p>
+        <button class="btn btn-white btn-md" type="button" data-clear>Clear all filters</button>
+      </div>
+      <nav class="pager" id="pager" aria-label="Pages"></nav>
+    </div>
+  </div>
+</section>
+</main>
+<!--/MAIN-->
+<script>
+(() => {
+'use strict';
+/* ---- facets: the same groups and values as the live shop sidebar ---- */
+const FACETS = [
+  { key: 'cat',   field: 'cat',   label: 'Product categories', values: ['Frames', 'Reading Glasses', 'Sun Glasses'] },
+  { key: 'gender', field: 'g',    label: 'Gender',   values: ['Female', 'Kids', 'Male', 'Unisex'] },
+  { key: 'color', field: 'col',   label: 'Color',    values: ['Black', 'Blue', 'Brown', 'Double Colour', 'Gold', 'Others'] },
+  { key: 'material', field: 'mat', label: 'Material', values: ['Accetate', 'HD Accetate', 'Metal', 'Poly Carbonate'] },
+  { key: 'shape', field: 'shape', label: 'Shape',    values: ['Geometric', 'Pantos', 'Rectangle', 'Square', 'Wayfarer'] },
+];
+const slug = v => v.toLowerCase().replace(/\s+/g, '-');
+const state = { f: Object.fromEntries(FACETS.map(f => [f.key, new Set()])), q: '', sort: 'default', per: 12, page: 1 };
+
+// read the address bar, e.g. shop.html?gender=kids&shape=wayfarer,rectangle&page=2
+const P0 = new URLSearchParams(location.search);
+FACETS.forEach(f => (P0.get(f.key) || '').split(',').filter(Boolean).forEach(v => {
+  const hit = f.values.find(x => slug(x) === v.toLowerCase()); if (hit) state.f[f.key].add(hit);
+}));
+state.q = (P0.get('q') || '').trim();
+if (['latest', 'az', 'za'].includes(P0.get('sort'))) state.sort = P0.get('sort');
+if (['24', '48'].includes(P0.get('per'))) state.per = +P0.get('per');
+state.page = Math.max(1, parseInt(P0.get('page')) || 1);
+$('#sort').value = state.sort; $('#per').value = String(state.per);
+
+const matchQ = it => !state.q || (it.n + ' ' + it.m.replace(/\s/g, '')).toLowerCase().includes(state.q.toLowerCase().replace(/\s+(?=\d)/g, ''))
+  || it.n.toLowerCase().includes(state.q.toLowerCase());
+const passes = (it, skip) => matchQ(it) && FACETS.every(f => f.key === skip || !state.f[f.key].size || state.f[f.key].has(it[f.field]));
+
+/* ---- facet checkboxes with live counts (a value's count respects the other groups) ---- */
+const host = $('#facets');
+host.innerHTML = FACETS.map(f => `<fieldset style="margin-bottom:24px"><legend>${f.label}</legend>${f.values.map(v =>
+  `<label class="opt"><input type="checkbox" data-f="${f.key}" value="${v}"><span>${v}</span><span class="n"></span></label>`).join('')}</fieldset>`).join('');
+host.addEventListener('change', e => {
+  const i = e.target; if (!i.dataset.f) return;
+  i.checked ? state.f[i.dataset.f].add(i.value) : state.f[i.dataset.f].delete(i.value);
+  state.page = 1; render();
+});
+
+const grid = $('#pgrid'), pager = $('#pager');
+const cardHTML = (it, k) => `<li style="--i:${k}"><article class="card">
+  <a class="ph" href="product.html?p=${it.s}" tabindex="-1" aria-hidden="true"><img class="main" src="img/c/${it.s}-0.jpg" alt="" loading="lazy" width="800" height="800">${it.i > 1 ? `<img class="alt" src="img/c/${it.s}-1.jpg" alt="" loading="lazy" width="800" height="800">` : ''}</a>
+  <div class="row"><div><h3><a href="product.html?p=${it.s}">${esc(it.m)}</a></h3><p class="sw"><i></i>${esc(it.c || it.col)} · ${esc(it.g)}</p></div>
+  <a class="btn btn-white btn-sm" href="locate.html" aria-label="Shop At: find ${esc(it.n)} at a CAV shop">Shop At</a></div>
+</article></li>`;
+
+let token = 0, first = true;
+function render(scroll) {
+  // counts and checkbox states
+  $$('input[data-f]', host).forEach(i => {
+    const f = FACETS.find(x => x.key === i.dataset.f);
+    const n = CATALOG.filter(it => passes(it, f.key) && it[f.field] === i.value).length;
+    i.checked = state.f[f.key].has(i.value);
+    i.closest('.opt').classList.toggle('is-zero', !n && !i.checked);
+    i.disabled = !n && !i.checked;
+    i.closest('.opt').querySelector('.n').textContent = n;
+  });
+  let list = CATALOG.filter(it => passes(it));
+  if (state.sort === 'latest') list = list.slice().reverse();
+  if (state.sort === 'az') list = list.slice().sort((a, b) => a.n.localeCompare(b.n, undefined, { numeric: true }));
+  if (state.sort === 'za') list = list.slice().sort((a, b) => b.n.localeCompare(a.n, undefined, { numeric: true }));
+  const pages = Math.max(1, Math.ceil(list.length / state.per));
+  state.page = Math.min(state.page, pages);
+  const from = (state.page - 1) * state.per, view = list.slice(from, from + state.per);
+
+  $('#rcount').innerHTML = list.length
+    ? `Showing <b>${from + 1}–${from + view.length}</b> of <b>${list.length}</b> ${list.length === 1 ? 'frame' : 'frames'}${state.q ? ` for “${esc(state.q)}”` : ''}`
+    : `No frames${state.q ? ` for “${esc(state.q)}”` : ''}`;
+  const active = FACETS.flatMap(f => [...state.f[f.key]].map(v => ({ f: f.key, v }))).concat(state.q ? [{ f: 'q', v: `“${state.q}”` }] : []);
+  $('#chips').innerHTML = active.map(a => `<button class="chip-x" type="button" data-rm="${a.f}" data-v="${esc(a.v)}" aria-label="Remove filter ${esc(a.v)}">${esc(a.v)} <span aria-hidden="true">×</span></button>`).join('');
+  $('.f-clear').hidden = !active.length;
+  $('.f-open').textContent = active.length ? `Filters (${active.length})` : 'Filters';
+  $('.f-apply .btn').textContent = `Show ${list.length} ${list.length === 1 ? 'frame' : 'frames'}`;
+  $('#empty').hidden = !!list.length;
+
+  // pages: 1 … 4 5 6 … 9
+  const nums = [...new Set([1, state.page - 1, state.page, state.page + 1, pages])].filter(n => n >= 1 && n <= pages).sort((a, b) => a - b);
+  pager.innerHTML = pages < 2 ? '' : `<button type="button" data-p="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''} aria-label="Previous page">←</button>`
+    + nums.map((n, k) => (k && n - nums[k - 1] > 1 ? '<span class="gap" aria-hidden="true">…</span>' : '') + `<button type="button" data-p="${n}" ${n === state.page ? 'aria-current="page"' : ''} aria-label="Page ${n}">${n}</button>`).join('')
+    + `<button type="button" data-p="${state.page + 1}" ${state.page === pages ? 'disabled' : ''} aria-label="Next page">→</button>`;
+
+  // keep the address bar in sync so a filtered view can be shared or bookmarked
+  const p = new URLSearchParams();
+  FACETS.forEach(f => state.f[f.key].size && p.set(f.key, [...state.f[f.key]].map(slug).join(',')));
+  if (state.q) p.set('q', state.q);
+  if (state.sort !== 'default') p.set('sort', state.sort);
+  if (state.per !== 12) p.set('per', state.per);
+  if (state.page > 1) p.set('page', state.page);
+  history.replaceState(null, '', location.pathname + (p.toString() ? '?' + p : ''));
+
+  // swap the grid with a short fade
+  const my = ++token, html = view.map(cardHTML).join('');
+  const put = () => {
+    if (my !== token) return;
+    grid.innerHTML = html; grid.classList.remove('is-out');
+    if (reduced()) return;
+    grid.classList.add('is-in');
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (my !== token) return; grid.classList.add('go'); setTimeout(() => my === token && grid.classList.remove('is-in', 'go'), 900); }));
+  };
+  if (first || reduced()) { first = false; grid.innerHTML = html; } else { grid.classList.remove('is-in', 'go'); grid.classList.add('is-out'); setTimeout(put, 180); }
+  if (scroll) $('.shop').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth' });
+}
+
+$('#chips').addEventListener('click', e => {
+  const b = e.target.closest('[data-rm]'); if (!b) return;
+  if (b.dataset.rm === 'q') state.q = ''; else state.f[b.dataset.rm].delete(b.dataset.v);
+  state.page = 1; render();
+});
+const clearAll = () => { FACETS.forEach(f => state.f[f.key].clear()); state.q = ''; state.page = 1; render(); };
+$('.f-clear').addEventListener('click', clearAll);
+$('[data-clear]').addEventListener('click', clearAll);
+$('#sort').addEventListener('change', e => { state.sort = e.target.value; state.page = 1; render(); });
+$('#per').addEventListener('change', e => { state.per = +e.target.value; state.page = 1; render(); });
+pager.addEventListener('click', e => { const b = e.target.closest('[data-p]'); if (!b || b.disabled) return; state.page = +b.dataset.p; render(true); });
+
+/* ---- phone/tablet: filters slide in from the right ---- */
+const panel = $('#filters'), veil = $('.f-veil'), openBtn = $('.f-open');
+const setPanel = on => {
+  panel.classList.toggle('is-open', on); veil.classList.toggle('is-open', on);
+  openBtn.setAttribute('aria-expanded', on); document.body.classList.toggle('lock', on);
+  if (on) setTimeout(() => panel.focus(), 60); else openBtn.focus();
+};
+openBtn.addEventListener('click', () => setPanel(true));
+$('.f-close').addEventListener('click', () => setPanel(false));
+$('.f-apply .btn').addEventListener('click', () => { setPanel(false); $('.shop').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth' }); });
+veil.addEventListener('click', () => setPanel(false));
+panel.addEventListener('keydown', e => { if (e.key === 'Escape' && panel.classList.contains('is-open')) setPanel(false); });
+matchMedia('(max-width: 900px)').addEventListener('change', e => { if (!e.matches && panel.classList.contains('is-open')) setPanel(false); });
+
+render();
+})();
+</script>

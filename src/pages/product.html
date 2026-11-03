@@ -1,0 +1,243 @@
+<!--{"title": "Frame · CAV", "desc": "CAV eyeglass frame: photos, size, colour, shape and material. Find it at a CAV shop near you.", "preload": "", "nav": "shop.html"}-->
+<style>/* ---------- Product detail ---------- */
+.bc{padding-block:24px 8px}
+.bc ol{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:15px;font-weight:500;color:#9a9a9a}
+.bc li+li::before{content:"›";margin-right:10px}
+.bc a{transition:color .2s}
+.bc a:hover,.bc [aria-current]{color:#fff}
+.pd{padding-block:24px clamp(72px,7vw,104px)}
+.pd .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.4vw,64px);align-items:start}
+.gal{display:grid;gap:14px}
+.stage{position:relative;aspect-ratio:1;border-radius:24px;background:#f4f4f2;overflow:hidden;touch-action:pan-y;cursor:zoom-in}
+.stage img{position:absolute;inset:0;margin:auto;width:92%;height:92%;object-fit:contain;mix-blend-mode:multiply;opacity:0;transition:opacity .45s var(--ease),transform .35s var(--ease);transform-origin:var(--ox,50%) var(--oy,50%)}
+.stage img.on{opacity:1}
+.stage.is-zoom img.on{transform:scale(1.9)}
+.stage .nav-b{position:absolute;top:50%;z-index:2;width:48px;height:48px;margin-top:-24px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;opacity:0;transition:opacity .25s,background-color .2s}
+.stage:hover .nav-b,.stage .nav-b:focus-visible{opacity:1}
+.stage .nav-b:hover{background:var(--gold)}
+.stage .nav-b svg{width:20px;height:20px;stroke-width:2}
+.stage .prev{left:16px}.stage .next{right:16px}
+.stage .idx{position:absolute;left:16px;bottom:16px;z-index:2;background:rgba(11,11,11,.72);color:#fff;font-size:13px;font-weight:700;border-radius:999px;padding:6px 12px}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.thumbs button{aspect-ratio:4/3;border-radius:16px;background:#f4f4f2;overflow:hidden;border:2px solid transparent;transition:border-color .2s}
+.thumbs button[aria-current=true]{border-color:var(--gold)}
+.thumbs img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transform:scale(1.15)}
+.info{position:sticky;top:24px;display:grid;gap:24px;align-content:start}
+.info .kick{font-size:15px;font-weight:600;color:#9a9a9a}
+.info .kick a{color:#d9d9d9;text-decoration:underline;text-underline-offset:3px}
+.info h1{font:700 clamp(48px,5vw,80px)/.92 var(--d);letter-spacing:-.035em}
+.info h1 .c{display:block;color:var(--gold);font-size:.5em;letter-spacing:-.02em;margin-top:10px}
+.info .short{font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:#d9d9d9}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:18px;overflow:hidden}
+.specs div{background:#151515;padding:16px 18px}
+.specs dt{font-size:13px;font-weight:700;color:#9a9a9a;margin-bottom:4px}
+.specs dd{margin:0;font-size:17px;font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.cta .btn{flex:1 1 200px}
+.cta .wa-b{background:#fff;color:var(--ink)}
+.cta .wa-b:hover{background:var(--gold)}
+.cta .wa-b svg{width:20px;height:20px;fill:#25d366}
+.meta-l{font-size:15px;color:#9a9a9a;display:flex;flex-wrap:wrap;gap:6px 20px}
+.meta-l b{color:#d9d9d9;font-weight:600}
+.ptabs{background:#fff;color:var(--ink);padding-block:clamp(72px,7vw,104px)}
+.tablist{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.tablist button{border-radius:999px;padding:12px 22px;font-size:17px;font-weight:600;background:var(--tile);color:var(--ink);transition:background-color .2s,color .2s}
+.tablist button:hover{background:#e6e6e3}
+.tablist button[aria-selected=true]{background:var(--ink);color:#fff}
+.tabp{max-width:820px;font-size:18px;line-height:1.65;color:var(--grey)}
+.tabp[hidden]{display:none}
+.tabp table{width:100%;border-collapse:collapse;font-size:17px}
+.tabp th,.tabp td{text-align:left;padding:14px 0;border-bottom:1px solid #e3e3e0}
+.tabp th{width:220px;color:var(--ink);font-weight:700}
+.tabp h3{font:700 28px/1.1 var(--d);color:var(--ink);margin:0 0 8px}
+.rv-form{display:grid;gap:18px;margin-top:28px;max-width:640px}
+.rv-form[hidden]{display:none}
+.rv-form .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stars{display:flex;gap:6px;border:0;padding:0;margin:0}
+.stars legend{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;padding:0}
+.stars input{position:absolute;opacity:0;width:1px;height:1px}
+.stars label{font-size:30px;line-height:1;color:#c9c9c4;cursor:pointer;transition:color .15s,transform .15s}
+.stars label:hover{transform:scale(1.12)}
+.stars .lit{color:var(--gold)}
+.stars input:focus-visible+label{outline:2px solid var(--red);outline-offset:2px;border-radius:4px}
+.rv-done{background:var(--tile);border-radius:18px;padding:24px;color:var(--ink);font-weight:600}
+.rv-done[hidden]{display:none}
+.rel{padding-block:clamp(72px,7vw,104px)}
+.rel h2{margin-bottom:40px}
+.rel .pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px}
+.rel .card .ph{background:#f4f4f2}
+.rel .card h3,.rel .card h3 a{color:#fff}
+.rel .sw{color:#bdbdbd}
+.rel .sw i{background:none;border:1.5px solid #777;width:10px;height:10px}
+.nf{padding-block:120px;display:grid;justify-items:start;gap:20px}
+.nf h1{font:700 clamp(44px,5vw,72px)/.95 var(--d);letter-spacing:-.03em}
+.nf p{font-size:19px;color:#bdbdbd}
+@media (max-width:1023px){.pd .wrap{grid-template-columns:1fr}.info{position:static}.rel .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.specs{grid-template-columns:1fr 1fr}.rv-form .two{grid-template-columns:1fr}.tabp th{width:130px}.rel .card .row{flex-direction:column;align-items:flex-start;gap:12px}.stage .nav-b{opacity:1;width:40px;height:40px;margin-top:-20px}}
+@media (hover:none){.stage{cursor:default}.stage .nav-b{opacity:1}}
+</style>
+<!--MAIN-->
+<main id="main">
+<div id="pd-root"></div>
+</main>
+<!--/MAIN-->
+<script>
+(() => {
+'use strict';
+/* ---- product detail: rendered from the catalogue by ?p=<slug> (same slugs as buycav.in/product/<slug>/) ---- */
+const slugQ = new URLSearchParams(location.search).get('p');
+const it = CATALOG.find(x => x.s === slugQ);
+const root = $('#pd-root');
+const cap = s => s ? s : '—';
+if (!it) {
+  document.title = 'Frame not found · CAV';
+  root.innerHTML = `<section class="nf wrap"><h1>We couldn’t find that frame.</h1><p>It may have moved. Browse all CAV frames instead.</p><a class="btn btn-red btn-lg" href="shop.html">Go to the shop</a></section>`;
+  return;
+}
+document.title = `${it.n} · CAV`;
+const wa = 'https://wa.me/914843160620?text=' + encodeURIComponent(`Hello, I’d like to know more about the CAV frame ${it.n}. ${location.href.split('?')[0]}?p=${it.s}`);
+const imgs = Array.from({ length: it.i }, (_, k) => `img/c/${it.s}-${k}.jpg`);
+const views = ['Front view', 'Side view', 'Folded view'];
+const related = CATALOG.filter(x => x.s !== it.s && x.g === it.g && x.shape === it.shape).slice(0, 4);
+if (related.length < 4) related.push(...CATALOG.filter(x => x.s !== it.s && x.g === it.g && !related.includes(x)).slice(0, 4 - related.length));
+
+root.innerHTML = `
+<nav class="bc wrap" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><a href="shop.html">Shop</a></li><li><a href="shop.html?cat=frames">${esc(it.cat)}</a></li><li><span aria-current="page">${esc(it.n)}</span></li></ol></nav>
+
+<section class="pd" aria-label="${esc(it.n)}">
+  <div class="wrap">
+    <div class="gal" aria-roledescription="carousel" aria-label="Photos of ${esc(it.n)}">
+      <div class="stage" id="stage">
+        ${imgs.map((src, k) => `<img src="${src}" alt="${esc(it.n)}, ${views[k] ? views[k].toLowerCase() : 'photo ' + (k + 1)}" width="800" height="800" ${k ? 'loading="lazy"' : 'fetchpriority="high"'} class="${k ? '' : 'on'}">`).join('')}
+        ${imgs.length > 1 ? `<button class="nav-b prev" type="button" aria-label="Previous photo"><svg class="ico"><use href="#i-left"/></svg></button><button class="nav-b next" type="button" aria-label="Next photo"><svg class="ico"><use href="#i-right"/></svg></button><span class="idx" aria-live="polite">1 / ${imgs.length}</span>` : ''}
+      </div>
+      ${imgs.length > 1 ? `<div class="thumbs">${imgs.map((src, k) => `<button type="button" aria-label="Show ${views[k] ? views[k].toLowerCase() : 'photo ' + (k + 1)}" ${k ? '' : 'aria-current="true"'}><img src="${src}" alt="" loading="lazy" width="800" height="800"></button>`).join('')}</div>` : ''}
+    </div>
+
+    <div class="info">
+      <p class="kick"><a href="shop.html?cat=frames">${esc(it.cat)}</a> · CAV</p>
+      <h1><span class="m">${esc(it.m)}</span> <span class="c">${esc(it.c)}</span></h1>
+      ${it.short ? `<p class="short">${esc(it.short)}</p>` : ''}
+      <dl class="specs">
+        <div><dt>Size</dt><dd>${esc(cap(it.size))}</dd></div>
+        <div><dt>Gender</dt><dd>${esc(cap(it.g))}</dd></div>
+        <div><dt>Shape</dt><dd>${esc(cap(it.shape))}</dd></div>
+        <div><dt>Material</dt><dd>${esc(cap(it.mat))}</dd></div>
+      </dl>
+      <div class="cta">
+        <a class="btn btn-red btn-lg" href="locate.html">Shop At <span class="arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn-lg wa-b" href="${wa}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>Ask on WhatsApp</a>
+      </div>
+      <p class="meta-l"><span>Brand: <b>CAV</b></span><span>Category: <b>${esc(it.cat)}</b></span></p>
+    </div>
+  </div>
+</section>
+
+<section class="ptabs light" aria-label="Product information">
+  <div class="wrap">
+    <div class="tablist" role="tablist" aria-label="Product information">
+      <button role="tab" id="tb-d" aria-controls="tp-d" aria-selected="true">Description</button>
+      <button role="tab" id="tb-a" aria-controls="tp-a" aria-selected="false" tabindex="-1">Additional information</button>
+      <button role="tab" id="tb-r" aria-controls="tp-r" aria-selected="false" tabindex="-1">Reviews (0)</button>
+    </div>
+    <div class="tabp" role="tabpanel" id="tp-d" aria-labelledby="tb-d" tabindex="0"><p><strong style="color:var(--ink)">Size:</strong> ${esc(cap(it.size))}</p></div>
+    <div class="tabp" role="tabpanel" id="tp-a" aria-labelledby="tb-a" tabindex="0" hidden>
+      <table><tbody>
+        <tr><th scope="row">Color</th><td>${esc(cap(it.col))}</td></tr>
+        <tr><th scope="row">Gender</th><td>${esc(cap(it.g))}</td></tr>
+        <tr><th scope="row">Shape</th><td>${esc(cap(it.shape))}</td></tr>
+        <tr><th scope="row">Material</th><td>${esc(cap(it.mat))}</td></tr>
+      </tbody></table>
+    </div>
+    <div class="tabp" role="tabpanel" id="tp-r" aria-labelledby="tb-r" tabindex="0" hidden>
+      <h3>Reviews</h3>
+      <p>There are no reviews yet. Be the first to review “${esc(it.n)}”.</p>
+      <form class="rv-form" id="rv-form" novalidate>
+        <fieldset class="stars" id="stars"><legend>Your rating <span style="color:var(--red)" aria-hidden="true">*</span></legend>
+          ${[1, 2, 3, 4, 5].map(n => `<input type="radio" name="rating" id="st${n}" value="${n}"><label for="st${n}" aria-label="${n} star${n > 1 ? 's' : ''}">★</label>`).join('')}
+        </fieldset>
+        <p class="err" id="e-rating" style="font-size:14px;font-weight:600;color:#c4161c"></p>
+        <div class="field"><label for="rv-text">Your review <span class="req" aria-hidden="true">*</span></label><textarea id="rv-text" name="comment" required aria-describedby="e-text"></textarea><p class="err" id="e-text"></p></div>
+        <div class="two">
+          <div class="field"><label for="rv-name">Name <span class="req" aria-hidden="true">*</span></label><input id="rv-name" name="author" autocomplete="name" required aria-describedby="e-rname"><p class="err" id="e-rname"></p></div>
+          <div class="field"><label for="rv-email">Email <span class="req" aria-hidden="true">*</span></label><input id="rv-email" name="email" type="email" autocomplete="email" required aria-describedby="e-remail"><p class="err" id="e-remail"></p></div>
+        </div>
+        <button class="btn btn-red btn-lg" type="submit" style="justify-self:start">Submit review</button>
+      </form>
+      <p class="rv-done" id="rv-done" hidden tabindex="-1" role="status">Thank you. Your review will appear here once CAV approves it.</p>
+    </div>
+  </div>
+</section>
+
+${related.length ? `<section class="rel" aria-labelledby="rel-h"><div class="wrap">
+  <h2 class="h2 rv" id="rel-h"><span class="mask"><span>Related products</span></span></h2>
+  <ul class="pgrid">${related.map(x => `<li><article class="card">
+    <a class="ph" href="product.html?p=${x.s}" tabindex="-1" aria-hidden="true"><img src="img/c/${x.s}-0.jpg" alt="" loading="lazy" width="800" height="800"></a>
+    <div class="row"><div><h3><a href="product.html?p=${x.s}">${esc(x.m)}</a></h3><p class="sw"><i></i>${esc(x.c)} · ${esc(x.g)}</p></div>
+    <a class="btn btn-white btn-sm" href="locate.html">Shop At</a></div></article></li>`).join('')}</ul>
+</div></section>` : ''}`;
+revealWatch(root);
+
+/* ---- gallery: arrows, thumbnails, keyboard, swipe, hover zoom ---- */
+const stage = $('#stage'), pics = $$('img', stage), thumbs = $$('.thumbs button'), idx = $('.idx', stage);
+let cur = 0;
+const show = k => {
+  cur = (k + pics.length) % pics.length;
+  pics.forEach((p, j) => p.classList.toggle('on', j === cur));
+  thumbs.forEach((t, j) => t.setAttribute('aria-current', j === cur));
+  if (idx) idx.textContent = `${cur + 1} / ${pics.length}`;
+};
+if (pics.length > 1) {
+  $('.prev', stage).addEventListener('click', () => show(cur - 1));
+  $('.next', stage).addEventListener('click', () => show(cur + 1));
+  thumbs.forEach((t, j) => t.addEventListener('click', () => show(j)));
+  $('.gal').addEventListener('keydown', e => { if (e.key === 'ArrowRight') show(cur + 1); if (e.key === 'ArrowLeft') show(cur - 1); });
+  let sx = 0, sy = 0;
+  stage.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') { sx = e.clientX; sy = e.clientY; } });
+  stage.addEventListener('pointerup', e => { if (e.pointerType === 'mouse') return; const dx = e.clientX - sx; if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(e.clientY - sy)) show(cur + (dx < 0 ? 1 : -1)); });
+}
+if (mqFine.matches && !reduced()) {
+  stage.addEventListener('mousemove', e => {
+    if (e.target.closest('.nav-b')) return stage.classList.remove('is-zoom');
+    const r = stage.getBoundingClientRect();
+    stage.style.setProperty('--ox', ((e.clientX - r.left) / r.width * 100) + '%');
+    stage.style.setProperty('--oy', ((e.clientY - r.top) / r.height * 100) + '%');
+    stage.classList.add('is-zoom');
+  });
+  stage.addEventListener('mouseleave', () => stage.classList.remove('is-zoom'));
+}
+
+/* ---- tabs ---- */
+const tabs = $$('[role=tab]', root);
+const pick = (t, focus) => {
+  tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; $('#' + b.getAttribute('aria-controls')).hidden = !on; });
+  if (focus) t.focus();
+};
+tabs.forEach((t, i) => {
+  t.addEventListener('click', () => pick(t));
+  t.addEventListener('keydown', e => {
+    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
+    if (to === undefined) return; e.preventDefault(); pick(tabs[(to + tabs.length) % tabs.length], true);
+  });
+});
+
+/* ---- review form: stars, required fields; reviews are moderated, so show a pending message ---- */
+const labels = $$('#stars label');
+const light = n => labels.forEach((l, j) => l.classList.toggle('lit', j < n));
+labels.forEach((l, j) => { l.addEventListener('mouseenter', () => light(j + 1)); });
+$('#stars').addEventListener('mouseleave', () => light(+($('#stars input:checked') || { value: 0 }).value));
+$('#stars').addEventListener('change', e => { light(+e.target.value); $('#e-rating').textContent = ''; });
+const err = (input, msg) => { input.setAttribute('aria-invalid', !!msg); $('#' + input.getAttribute('aria-describedby')).textContent = msg; return !msg; };
+$('#rv-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = e.target, bad = [];
+  if (!$('#stars input:checked')) { $('#e-rating').textContent = 'Please choose a rating.'; bad.push($('#st1')); }
+  const t = $('#rv-text'), n = $('#rv-name'), m = $('#rv-email');
+  if (!err(t, t.value.trim() ? '' : 'Please write your review.')) bad.push(t);
+  if (!err(n, n.value.trim() ? '' : 'Please enter your name.')) bad.push(n);
+  if (!err(m, /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m.value.trim()) ? '' : 'Please enter a valid email.')) bad.push(m);
+  if (bad.length) return bad[0].focus();
+  f.hidden = true; $('#rv-done').hidden = false; $('#rv-done').focus();
+});
+})();
+</script>

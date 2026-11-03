@@ -1,0 +1,142 @@
+<!--{"title": "Contact Us · CAV", "desc": "Contact CAV eyewear (BOSYM Pvt Ltd, Edappally, Kochi): send a message or find us on the map.", "preload": "img/cat-men.webp", "nav": "contact.html"}-->
+<style>/* ---------- Contact Us ---------- */
+.ct{background:#fff;color:var(--ink);padding-block:clamp(80px,9vw,128px)}
+.ct .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,4.4vw,64px);align-items:start}
+.ct h2{font:700 clamp(40px,4.45vw,64px)/.95 var(--d);letter-spacing:-.03em;margin-bottom:32px}
+.ct form{display:grid;gap:20px}
+.ct form[hidden]{display:none}
+.ct .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.ct .send{justify-self:start;margin-top:4px}
+.ct .note{font-size:14px;color:var(--grey)}
+.done{display:grid;gap:12px;background:var(--tile);border-radius:20px;padding:28px}
+.done[hidden]{display:none}
+.done b{font:700 28px/1.1 var(--d);letter-spacing:-.015em}
+.done p{font-size:17px;line-height:1.6;color:var(--grey)}
+.done a{color:var(--red);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.map{position:sticky;top:24px;border-radius:24px;overflow:hidden;background:var(--black);color:#fff;aspect-ratio:4/5;display:grid}
+.map>*{grid-area:1/1}
+.map iframe{width:100%;height:100%;border:0}
+.map .cover{display:grid;align-content:space-between;gap:24px;padding:clamp(24px,3vw,40px)}
+.map .pin{width:64px;height:64px;border-radius:50%;background:var(--red);display:grid;place-items:center}
+.map .pin svg{width:30px;height:30px;stroke:#fff;stroke-width:1.6}
+.map h3{font:700 clamp(28px,2.6vw,40px)/1.05 var(--d);letter-spacing:-.02em;margin-bottom:12px}
+.map address{font-style:normal;font-size:17px;line-height:1.6;color:#bdbdbd}
+.map .acts{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.map .acts a{color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.map small{font-size:14px;color:#9a9a9a}
+@media (max-width:900px){
+  .ct .wrap{grid-template-columns:1fr}
+  .map{position:static;aspect-ratio:4/3}
+}
+@media (max-width:560px){.ct .two{grid-template-columns:1fr}.map{aspect-ratio:auto;min-height:420px}}
+</style>
+<!--MAIN-->
+<main id="main">
+
+<!-- Page title (live: "Contact Us" + breadcrumb) -->
+<section class="pt" id="hero" aria-labelledby="pt-h1">
+  <div class="slide is-on">
+    <div class="media"><img src="img/cat-men.webp" alt="Man wearing black CAV frames" width="900" height="1205" fetchpriority="high" style="object-position:50% 30%"></div>
+    <div class="scrim"></div>
+  </div>
+  <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Contact Us</span></li></ol></nav>
+  <h1 class="word" id="pt-h1" aria-label="Contact Us"><span aria-hidden="true"><span class="ch" style="--i:0">C</span><span class="ch" style="--i:1">o</span><span class="ch" style="--i:2">n</span><span class="ch" style="--i:3">t</span><span class="ch" style="--i:4">a</span><span class="ch" style="--i:5">c</span><span class="ch" style="--i:6">t</span> <span class="ch" style="--i:8">U</span><span class="ch" style="--i:9">s</span></span></h1>
+</section>
+
+<!-- Live: Google map + "Contact Form" (name, email, subject, message, Send) -->
+<section class="ct light" aria-labelledby="ct-h2">
+  <div class="wrap">
+    <div>
+      <h2 class="rv" id="ct-h2"><span class="mask"><span>Contact Form</span></span></h2>
+      <form id="ct-form" class="rv" style="--dl:1" novalidate>
+        <div class="two">
+          <div class="field">
+            <label for="f-name">Your Name <span class="req" aria-hidden="true">*</span><span class="sr">(required)</span></label>
+            <input id="f-name" name="name" autocomplete="name" required aria-describedby="e-name">
+            <p class="err" id="e-name" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-email">Your Email <span class="req" aria-hidden="true">*</span><span class="sr">(required)</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+            <p class="err" id="e-email" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="f-subject">Subject</label>
+          <input id="f-subject" name="subject">
+        </div>
+        <div class="field">
+          <label for="f-msg">Your Message</label>
+          <textarea id="f-msg" name="message" rows="6"></textarea>
+        </div>
+        <button class="btn btn-red btn-lg send" type="submit">Send <span class="arrow" aria-hidden="true">→</span></button>
+        <p class="note">Fields marked * are required.</p>
+      </form>
+      <div class="done" id="ct-done" hidden tabindex="-1" role="status">
+        <b>Thank you<span id="ct-who"></span>.</b>
+        <p>Your email app should open with your message to CAV. If it didn’t, write to us at <a href="mailto:main@bosymcorp.com">main@bosymcorp.com</a> or call <a href="tel:+914843160620">+91 484 316 0620</a>.</p>
+        <p><button class="btn btn-tile btn-md" type="button" id="ct-again">Write another message</button></p>
+      </div>
+    </div>
+
+    <div class="map rv" style="--dl:2" id="map">
+      <div class="cover">
+        <span class="pin" aria-hidden="true"><svg class="ico" viewBox="0 0 16 16"><use href="#i-pin"/></svg></span>
+        <div>
+          <h3>Find us</h3>
+          <address>2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024</address>
+        </div>
+        <div class="acts">
+          <button class="btn btn-white btn-md" type="button" id="map-load">Show map</button>
+          <a href="https://www.google.com/maps/search/?api=1&query=Manglavil+Apartments+Edappally+Kochi" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+          <small>The map is loaded from Google, which may set its own cookies.</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<!--/MAIN-->
+<script>
+(() => {
+'use strict';
+/* ---- contact form: check required fields, then hand the message to the visitor's email app ---- */
+const form = $('#ct-form'), done = $('#ct-done');
+const show = (input, msg) => {
+  const err = $('#' + input.getAttribute('aria-describedby'));
+  input.setAttribute('aria-invalid', !!msg);
+  err.textContent = msg || '';
+};
+const check = input => {
+  const v = input.value.trim();
+  if (input.required && !v) return show(input, input.name === 'name' ? 'Please enter your name.' : 'Please enter your email.'), false;
+  if (input.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return show(input, 'Please enter a valid email, like name@example.com.'), false;
+  show(input, ''); return true;
+};
+const required = $$('[required]', form);
+// re-check a field as the visitor fixes it, once it has been flagged
+required.forEach(i => i.addEventListener('input', () => { if (i.getAttribute('aria-invalid') === 'true') check(i); }));
+required.forEach(i => i.addEventListener('blur', () => { if (i.value.trim()) check(i); }));
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const bad = required.filter(i => !check(i));
+  if (bad.length) { bad[0].focus(); return; }
+  const d = Object.fromEntries(new FormData(form));
+  const subject = d.subject.trim() || 'Message from the CAV website';
+  const body = `${d.message.trim()}\n\n${d.name.trim()}\n${d.email.trim()}`;
+  location.href = `mailto:main@bosymcorp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  $('#ct-who').textContent = ', ' + d.name.trim().split(/\s+/)[0];
+  form.hidden = true; done.hidden = false; done.focus();
+});
+$('#ct-again').addEventListener('click', () => { form.reset(); done.hidden = true; form.hidden = false; $('#f-name').focus(); });
+
+/* ---- map: load Google Maps only when asked (it sets third-party cookies) ---- */
+$('#map-load').addEventListener('click', () => {
+  const f = document.createElement('iframe');
+  f.title = 'Map: BOSYM, Manglavil Apartments, Edappally, Kochi';
+  f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade';
+  f.src = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.7875631403817!2d76.31393727629215!3d10.03438157243958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080db4c5ca367f%3A0x2e2fab4c085c29cf!2sManglavil%20Apartments!5e0!3m2!1sen!2sin!4v1693905460877!5m2!1sen!2sin';
+  const map = $('#map'); map.replaceChildren(f);
+});
+})();
+</script>
