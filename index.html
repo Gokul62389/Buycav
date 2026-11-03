@@ -308,8 +308,9 @@ html:not(.js) .tabs button[aria-selected=true]{background:var(--red)}
 .social a{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center;transition:background-color .25s,transform .3s var(--ease)}
 .social a:hover{background:var(--gold);transform:translateY(-3px)}
 .social svg{width:20px;height:20px}
-.band{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-block:64px 40px}
-.band img{width:160px;height:auto}
+.brand{display:grid;gap:28px;justify-items:start;align-content:start}
+.brand img{width:160px;height:auto}
+.band{display:flex;justify-content:flex-end;align-items:flex-end;gap:24px;padding-block:64px 40px}
 .band small{font-size:14px;line-height:1.6;color:#9a9a9a}
 .legal{display:grid;gap:6px;justify-items:end;text-align:right}
 .legal nav{display:flex;flex-wrap:wrap;gap:4px 20px}
@@ -391,7 +392,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .foot .cols{grid-template-columns:1fr;gap:36px}
   .foot .tag{font-size:30px}
   .band{flex-direction:column;align-items:flex-start;padding-block:48px 32px}
-  .band img{width:112px}
+  .brand img{width:112px}
 }
 /* phone: one column of shorter landscape cards, cropped to the faces */
 @media (max-width:640px){
@@ -752,7 +753,10 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
 <footer class="foot">
   <div class="wrap">
     <div class="cols">
-      <p class="tag rv">Stylish quality<br>eyewear</p>
+      <div class="brand">
+        <p class="tag">Stylish quality<br>eyewear</p>
+        <img src="img/cav-logo-gold.png" alt="CAV" width="160" height="67" loading="lazy">
+      </div>
       <div class="rv" style="--dl:1">
         <h3>Find us</h3>
         <address>
@@ -772,7 +776,6 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
       </div>
     </div>
     <div class="band">
-      <img src="img/cav-logo-gold.png" alt="CAV" width="160" height="67" loading="lazy">
       <div class="legal">
         <nav aria-label="Legal"><a href="privacy.html">Privacy policy</a><a href="cookies.html">Cookie policy</a><button type="button" data-cookie-settings>Cookie settings</button></nav>
         <small>All content © 2026 by Bosym® Pvt Ltd &amp; CAV®. All rights reserved.</small>
