@@ -391,7 +391,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .foot .cols{grid-template-columns:1fr;gap:36px}
   .foot .tag{font-size:30px}
   .band{flex-direction:column;align-items:flex-start;padding-block:48px 32px}
-  .band img{width:140px}
+  .band img{width:112px}
 }
 /* phone: one column of shorter landscape cards, cropped to the faces */
 @media (max-width:640px){
@@ -772,7 +772,7 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
       </div>
     </div>
     <div class="band">
-      <img class="rv" src="img/cav-logo-gold.png" alt="CAV" width="264" height="111" loading="lazy">
+      <img src="img/cav-logo-gold.png" alt="CAV" width="160" height="67" loading="lazy">
       <div class="legal">
         <nav aria-label="Legal"><a href="privacy.html">Privacy policy</a><a href="cookies.html">Cookie policy</a><button type="button" data-cookie-settings>Cookie settings</button></nav>
         <small>All content © 2026 by Bosym® Pvt Ltd &amp; CAV®. All rights reserved.</small>
@@ -1161,7 +1161,11 @@ sToggle.addEventListener('click', () => toggleSearch(!sMob.classList.contains('i
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
   }), { rootMargin: '0px 0px -8% 0px', threshold: .12 });
-  $$('.rv, .panel-img').forEach(el => io.observe(el));
+  const all = $$('.rv, .panel-img');
+  all.forEach(el => io.observe(el));
+  // at the very bottom of the page nothing can scroll further into view: reveal whatever is left
+  const atEnd = () => { if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) all.forEach(el => el.classList.add('in')); };
+  addEventListener('scroll', atEnd, { passive: true }); atEnd();
 }
 
 /* ---- scroll: smart sticky header, hero parallax, WhatsApp pill ---- */
