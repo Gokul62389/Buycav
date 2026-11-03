@@ -339,10 +339,14 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .foot .cols{grid-template-columns:1fr 1fr 1fr}
 }
 @media (max-width:1023px){
-  .tiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(-1*var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);gap:16px}
-  .tiles::-webkit-scrollbar{display:none}
-  .tile{flex:none;width:min(420px,62vw);scroll-snap-align:start}
-  .tile h3{font-size:32px}
+  /* tablet: three narrower columns, no sideways scrolling */
+  .tiles{gap:16px}
+  .tile{gap:12px}
+  .tile h3{font-size:28px}
+  .tile .tfoot{flex-direction:column;align-items:flex-start;gap:2px}
+  .glance{left:10px;right:10px;bottom:10px;padding:12px}
+  .glance .ph{display:none}
+  .glance b{font-size:20px}
   .count .wrap{grid-template-columns:1fr;gap:40px}
   .latest .wrap{grid-template-columns:1fr;gap:24px}
   .latest .side{position:static}
@@ -391,12 +395,20 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
   .band{flex-direction:column;align-items:flex-start;padding-block:48px 32px}
   .band img{width:200px}
 }
+/* phone: one column of shorter landscape cards, cropped to the faces */
+@media (max-width:640px){
+  .cats .h2{margin-bottom:28px}
+  .tiles{grid-template-columns:1fr;gap:28px}
+  .tile .media{aspect-ratio:16/10}
+  .tile .media>img{object-position:50% 22%}
+  .tile .tfoot{flex-direction:row;align-items:center}
+  .tile h3{font-size:30px}
+}
 @media (max-width:560px){
   .topbar .grp{gap:16px}
   .topbar .phone span{display:none}
-  .tile{width:82vw}
   .glance{left:12px;right:12px;bottom:12px;padding:10px;gap:12px}
-  .glance .ph{width:96px}
+  .glance .ph{display:block;width:96px}
   .glance b{font-size:22px}
   .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 12px}
   .grid .card .row{flex-direction:column;align-items:flex-start;gap:12px}
