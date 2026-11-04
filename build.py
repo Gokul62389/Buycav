@@ -4,6 +4,10 @@ import json, re, pathlib
 
 root = pathlib.Path(__file__).parent
 part = {p.stem: p.read_text() for p in (root / 'src/partials').glob('*.html')}
+# cache-busting: each shared file is linked with a short hash of its contents, so browsers never mix old and new
+import hashlib
+ver = {f: hashlib.md5((root / f).read_bytes()).hexdigest()[:8] for f in ('site.css', 'site.js', 'catalog.js', 'consent.js', 'consent.css')}
+stamp = lambda html: re.sub(r'(href|src)="(site\.css|site\.js|catalog\.js|consent\.js|consent\.css)"', lambda m: f'{m.group(1)}="{m.group(2)}?v={ver[m.group(2)]}"', html)
 
 for src in sorted((root / 'src/pages').glob('*.html')):
     text = src.read_text()
@@ -21,5 +25,5 @@ for src in sorted((root / 'src/pages').glob('*.html')):
     if nav:
         header = re.sub(rf'(<li(?: style="--i:\d")?><a href="{re.escape(nav)}")>', r'\1 aria-current="page">', header)
     out = head + header + main + part['footer'] + '<script src="catalog.js"></script>\n<script src="site.js"></script>\n' + js + '</body>\n</html>\n'
-    (root / src.name).write_text(out)
+    (root / src.name).write_text(stamp(out))
     print('built', src.name, len(out))

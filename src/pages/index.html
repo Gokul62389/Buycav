@@ -70,7 +70,7 @@
           <img src="img/cat-men.webp" alt="Man wearing black CAV frames" width="900" height="1205" loading="lazy">
           <button class="peek" aria-expanded="false" aria-controls="g-men" aria-label="Show the top pick for men"></button>
           <span class="shade"></span>
-          <span class="chip" aria-hidden="true">+ Top pick</span>
+          <span class="chip" aria-hidden="true">+ Top picks</span>
           <div class="glance" id="g-men">
             <div class="ph"><img src="img/p/192A.jpg" alt="" loading="lazy"></div>
             <div class="info">
@@ -91,7 +91,7 @@
           <img src="img/cat-women.webp" alt="Woman wearing black CAV frames" width="900" height="1205" loading="lazy">
           <button class="peek" aria-expanded="false" aria-controls="g-women" aria-label="Show the top pick for women"></button>
           <span class="shade"></span>
-          <span class="chip" aria-hidden="true">+ Top pick</span>
+          <span class="chip" aria-hidden="true">+ Top picks</span>
           <div class="glance" id="g-women">
             <div class="ph"><img src="img/p/279A.jpg" alt="" loading="lazy"></div>
             <div class="info">
@@ -112,7 +112,7 @@
           <img src="img/cat-unisex.webp" alt="A woman and a man wearing CAV frames" width="900" height="1205" loading="lazy">
           <button class="peek" aria-expanded="false" aria-controls="g-unisex" aria-label="Show the top pick for unisex"></button>
           <span class="shade"></span>
-          <span class="chip" aria-hidden="true">+ Top pick</span>
+          <span class="chip" aria-hidden="true">+ Top picks</span>
           <div class="glance" id="g-unisex">
             <div class="ph"><img src="img/p/96A.jpg" alt="" loading="lazy"></div>
             <div class="info">
@@ -133,7 +133,7 @@
           <img src="img/cat-kids.webp" alt="Boy wearing black CAV frames" width="900" height="1200" loading="lazy">
           <button class="peek" aria-expanded="false" aria-controls="g-kids" aria-label="Show the top pick for kids"></button>
           <span class="shade"></span>
-          <span class="chip" aria-hidden="true">+ Top pick</span>
+          <span class="chip" aria-hidden="true">+ Top picks</span>
           <div class="glance" id="g-kids">
             <div class="ph"><img src="img/p/32A.jpg" alt="" loading="lazy"></div>
             <div class="info">
@@ -421,16 +421,33 @@ syncPill();
   });
 }
 
-/* ---- category tiles: hover (mouse) or tap (touch / keyboard) shows the top pick ---- */
+/* ---- category tiles: hover (mouse) or tap (touch / keyboard) shows three top picks ---- */
 {
   const tiles = $$('.tile');
+  // three frames per category (live genders from the catalogue); the first is the original top pick
+  const PICKS = {
+    men:    { g: 'male',   label: 'men',    s: ['cs27g-gun-metal', 'cl-2016-black', 'cs27a-gold'] },
+    women:  { g: 'female', label: 'women',  s: ['ct-5431-brown-violet-gr', 'cc-606-red-black', 'cc-1013-black-violet-gr'] },
+    unisex: { g: 'unisex', label: 'unisex', s: ['cc-056-brown', 'cc-059-brown', 'c-2631-assorted'] },
+    kids:   { g: 'kids',   label: 'kids',   s: ['cl-2015-green-brown', 'ce-003-wellow-wine', 'ce-003-assorted'] },
+  };
+  tiles.forEach(t => {
+    const g = $('.glance', t), key = g.id.replace('g-', ''), set = PICKS[key];
+    const items = set.s.map(s => CATALOG.find(x => x.s === s)).filter(Boolean);
+    if (!items.length) return;
+    g.classList.add('multi');
+    g.innerHTML = `<div class="gh"><small>Top picks for ${set.label}</small><a href="shop.html?gender=${set.g}">View all <span aria-hidden="true">→</span></a></div>
+      <div class="picks">${items.map((x, i) => `<a class="pick" style="--i:${i}" href="product.html?p=${x.s}" aria-label="${esc(x.m)}, ${esc(x.c)}">
+        <span class="th"><img src="img/c/${x.s}-0.jpg" alt="" loading="lazy" width="800" height="800"></span><b>${esc(x.m)}</b><span class="cl">${esc(x.c)}</span></a>`).join('')}</div>`;
+    $('.peek', t).setAttribute('aria-label', `Show the top picks for ${set.label}`);
+  });
   const set = (t, on) => { t.classList.toggle('is-open', on); $('.peek', t).setAttribute('aria-expanded', on); };
   tiles.forEach(t => {
     $('.peek', t).addEventListener('click', () => {
       const on = !t.classList.contains('is-open');
       tiles.forEach(o => o !== t && set(o, false));
       set(t, on);
-      if (on && !mqFine.matches) $('.glance b a', t).focus({ preventScroll: true });
+      if (on && !mqFine.matches) $('.glance .pick, .glance a', t).focus({ preventScroll: true });
     });
     t.addEventListener('mouseleave', () => { if (mqFine.matches) set(t, false); });
     t.addEventListener('keydown', e => { if (e.key === 'Escape' && t.classList.contains('is-open')) { set(t, false); $('.peek', t).focus(); } });

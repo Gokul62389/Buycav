@@ -165,6 +165,20 @@ body.lock{overflow:hidden}
 .glance b a:hover{text-decoration:underline;text-underline-offset:3px}
 .glance span{font-size:15px;color:var(--grey)}
 .glance .btn{margin-top:6px;padding:8px 16px}
+.glance.multi{flex-direction:column;align-items:stretch;gap:10px;padding:12px}
+.glance .gh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.glance .gh a{font-size:13px;font-weight:700;color:var(--red);white-space:nowrap}
+.glance .gh a:hover{text-decoration:underline;text-underline-offset:3px}
+.picks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.pick{display:grid;gap:4px;min-width:0;opacity:0;transform:translateY(12px);transition:opacity .3s,transform .5s var(--ease)}
+.tile.is-open .pick,.tile:focus-within .pick{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*.07s)}
+@media (hover:hover) and (pointer:fine){.tile:hover .pick{opacity:1;transform:none;transition-delay:calc(.12s + var(--i)*.07s)}}
+.pick .th{display:block;aspect-ratio:4/3;border-radius:10px;background:var(--tile);overflow:hidden;margin-bottom:2px}
+.pick .th img{width:100%;height:100%;object-fit:cover;mix-blend-mode:multiply;transform:scale(1.18);transition:transform .45s var(--ease)}
+.pick:hover .th img{transform:scale(1.3)}
+.pick b{font:700 15px/1.1 var(--d);letter-spacing:-.01em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pick .cl{font-size:13px;line-height:1.25;color:var(--grey);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
+.pick:hover b{text-decoration:underline;text-underline-offset:2px}
 .tile.is-open .glance,.tile:focus-within .glance{opacity:1;transform:none;visibility:visible;transition:opacity .35s,transform .55s var(--ease)}
 .tile.is-open .shade,.tile:focus-within .shade{opacity:1}
 .tile.is-open .media>img{transform:scale(1.04)}
@@ -414,7 +428,9 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
 @media (max-width:640px){
   .cats .h2{margin-bottom:28px}
   .tiles{grid-template-columns:1fr;gap:28px}
-  .tile .media{aspect-ratio:16/10}
+  .tile .media{aspect-ratio:4/3}
+  .pick .th{aspect-ratio:16/10}
+  .glance.multi{gap:8px;padding:10px}
   .tile .media>img{object-position:50% 22%}
   .tile .tfoot{flex-direction:row;align-items:center;justify-content:space-between}
   .tile h3{font-size:30px}
