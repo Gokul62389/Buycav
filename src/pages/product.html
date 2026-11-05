@@ -32,6 +32,9 @@
 .specs div{background:#151515;padding:16px 18px}
 .specs dt{font-size:13px;font-weight:700;color:#9a9a9a;margin-bottom:4px}
 .specs dd{margin:0;font-size:17px;font-weight:600}
+.specs .wide{grid-column:1/-1}
+.specs .av{display:inline-flex;align-items:center;gap:8px}
+.specs .av::before{content:"";width:8px;height:8px;border-radius:50%;background:#3fbf6f}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
 .cta .btn{flex:1 1 200px}
 .cta .wa-b{background:#fff;color:var(--ink)}
@@ -117,10 +120,13 @@ root.innerHTML = `
       <h1><span class="m">${esc(it.m)}</span> <span class="c">${esc(it.c)}</span></h1>
       ${it.short ? `<p class="short">${esc(it.short)}</p>` : ''}
       <dl class="specs">
+        <div><dt>Model</dt><dd>${esc(cap(it.m))}</dd></div>
+        <div><dt>Material</dt><dd>${esc(cap(it.mat))}</dd></div>
+        <div><dt>Colour</dt><dd>${esc(cap(it.c))}</dd></div>
         <div><dt>Size</dt><dd>${esc(cap(it.size))}</dd></div>
         <div><dt>Gender</dt><dd>${esc(cap(it.g))}</dd></div>
-        <div><dt>Shape</dt><dd>${esc(cap(it.shape))}</dd></div>
-        <div><dt>Material</dt><dd>${esc(cap(it.mat))}</dd></div>
+        <div><dt>Availability</dt><dd>${it.av ? `<span class="av">${esc(it.av)}</span>` : '—'}</dd></div>
+        <div class="wide"><dt>Price</dt><dd>${it.price ? esc(it.price) : 'Price on request'}</dd></div>
       </dl>
       <div class="cta">
         <a class="btn btn-red btn-lg" href="locate.html">Shop At <span class="arrow" aria-hidden="true">→</span></a>
