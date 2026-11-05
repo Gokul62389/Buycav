@@ -58,7 +58,7 @@
 .cta .wa-b svg{width:20px;height:20px;fill:#25d366}
 .meta-l{font-size:15px;color:#9a9a9a;display:flex;flex-wrap:wrap;gap:6px 20px}
 .meta-l b{color:#d9d9d9;font-weight:600}
-/* reviews: summary + filters on the left, list on the right */
+/* reviews: summary on the left, list on the right */
 .rw{background:#fff;color:var(--ink);padding-block:clamp(48px,5vw,72px)}
 .rw .wrap{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
 .rw-sum{position:sticky;top:120px;display:grid;gap:14px}
@@ -69,18 +69,9 @@
 .rate{position:relative;display:inline-block;width:max-content;justify-self:start;font-size:var(--fs,22px);line-height:1;letter-spacing:2px;color:#d6d6d2}
 .rate::before,.rate i::before{content:"★★★★★"}
 .rate i{position:absolute;inset:0 auto 0 0;width:calc(var(--r)/5*100%);overflow:hidden;color:var(--gold);font-style:normal;white-space:nowrap}
-.rw-bars{display:grid;gap:0;list-style:none;margin:0;padding:0}
-.rw-bars button{width:100%;display:grid;grid-template-columns:36px 1fr 22px;align-items:center;gap:10px;padding:5px 8px;margin-inline:-8px;border-radius:8px;font-size:14px;font-weight:600;color:var(--ink);transition:background-color .2s}
-.rw-bars button:hover:not(:disabled){background:var(--tile)}
-.rw-bars button[aria-pressed=true]{background:var(--tile)}
-.rw-bars button:disabled{color:#a8a8a4;cursor:default}
-.rw-bars .bar{height:6px;border-radius:99px;background:#ececea;overflow:hidden}
-.rw-bars .bar i{display:block;height:100%;width:var(--w);background:var(--gold);border-radius:inherit;transition:width .8s var(--ease)}
-.rw-bars .n{text-align:right;color:var(--grey);font-weight:500}
 .rw-main{display:grid;gap:12px;min-width:0}
 .rw-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
 .rw-head p{font-size:15px;color:var(--grey)}
-.rw-head p button{color:var(--red);font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-left:6px}
 .rw-head .field{grid-auto-flow:column;align-items:center;gap:10px}
 .rw-head select{min-height:38px;padding-block:6px;font-size:14px;width:auto}
 .rw-head .field label{font-size:14px}
@@ -114,7 +105,7 @@
 .rv-done{background:#e9f6ee;border-radius:16px;padding:18px 22px;color:#1d5a35;font-weight:600}
 .rv-done[hidden]{display:none}
 @media (max-width:900px){.rw .wrap{grid-template-columns:1fr}.rw-sum{position:static}}
-@media (prefers-reduced-motion:reduce){.rw-card{animation:none}.rw-bars .bar i{transition:none}}
+@media (prefers-reduced-motion:reduce){.rw-card{animation:none}}
 .rel{padding-block:clamp(72px,7vw,104px)}
 .rel h2{margin-bottom:40px}
 .rel .pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px}
@@ -332,7 +323,6 @@ root.innerHTML = `
     <aside class="rw-sum">
       <h2 id="rw-h">Reviews</h2>
       <div class="rw-avg" id="rw-avg"></div>
-      <ul class="rw-bars" id="rw-bars" aria-label="Filter reviews by rating"></ul>
       <button class="btn btn-red btn-sm" type="button" id="rw-write" aria-controls="rv-form" aria-expanded="false" style="justify-self:start">Write a review</button>
     </aside>
     <div class="rw-main">
@@ -411,7 +401,7 @@ const KEY = 'cav_reviews_' + it.s;
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
 const save = list => { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch {} };
 const approved = REVIEWS[it.s] || SAMPLE;
-let mine = load(), filter = 0, shown = 3;
+let mine = load(), shown = 3;
 const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 const stars = (r, fs) => `<span class="rate" style="--r:${r}${fs ? ';--fs:' + fs : ''}" role="img" aria-label="Rated ${r} out of 5"><i></i></span>`;
 
@@ -420,37 +410,23 @@ const renderSummary = () => {
   $('#rw-avg').innerHTML = n
     ? `<b>${avg.toFixed(1)}</b><div>${stars(Math.round(avg * 10) / 10)}<p>Based on ${n} review${n > 1 ? 's' : ''}</p></div>`
     : `<div><p style="font-size:17px">No reviews yet. Be the first to review this frame.</p></div>`;
-  $('#rw-bars').innerHTML = [5, 4, 3, 2, 1].map(s => {
-    const c = approved.filter(r => r.rating === s).length;
-    return `<li><button type="button" data-s="${s}" aria-pressed="${filter === s}" ${c ? '' : 'disabled'} aria-label="${s} star: ${c} review${c === 1 ? '' : 's'}">
-      <span>${s} ★</span><span class="bar"><i style="--w:${n ? c / n * 100 : 0}%"></i></span><span class="n">${c}</span></button></li>`;
-  }).join('');
 };
 const renderList = () => {
   const sort = $('#rw-sort').value;
   const by = { new: (a, b) => b.date.localeCompare(a.date), high: (a, b) => b.rating - a.rating || b.date.localeCompare(a.date), low: (a, b) => a.rating - b.rating || b.date.localeCompare(a.date) }[sort];
   // the visitor's own pending reviews stay on top; they don't count towards the average
-  const list = [...mine.map(r => ({ ...r, pending: true })).sort(by), ...approved.slice().sort(by)].filter(r => !filter || r.rating === filter);
-  const total = approved.filter(r => !filter || r.rating === filter).length;
-  $('#rw-count').innerHTML = filter
-    ? `${total} review${total === 1 ? '' : 's'} with ${filter} stars<button type="button" id="rw-clear">Show all</button>`
-    : `${approved.length} review${approved.length === 1 ? '' : 's'}`;
+  const list = [...mine.map(r => ({ ...r, pending: true })).sort(by), ...approved.slice().sort(by)];
+  $('#rw-count').textContent = `${approved.length} review${approved.length === 1 ? '' : 's'}`;
   $('#rw-list').innerHTML = list.length ? list.slice(0, shown).map((r, i) => `<li class="rw-card" style="--i:${i}">
       <header><span class="av" aria-hidden="true">${esc(r.name.trim()[0].toUpperCase())}</span>
         <div class="who"><b>${esc(r.name)}</b><span>${fmt(r.date)}</span></div>
         ${r.pending ? '<span class="tag pend">Awaiting approval</span>' : r.sample ? '<span class="tag">Sample</span>' : ''}</header>
       ${stars(r.rating, '15px')}
       <p>${esc(r.text)}</p></li>`).join('')
-    : `<li class="rw-empty">${filter ? 'No reviews with this rating yet.' : `There are no reviews yet. Be the first to review “${esc(it.n)}”.`}</li>`;
+    : `<li class="rw-empty">There are no reviews yet. Be the first to review “${esc(it.n)}”.</li>`;
   $('#rw-more').hidden = list.length <= shown;
 };
 renderSummary(); renderList();
-$('#rw-bars').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  filter = filter === +b.dataset.s ? 0 : +b.dataset.s; shown = 3;
-  renderSummary(); renderList();
-});
-$('#rw-count').addEventListener('click', e => { if (e.target.id === 'rw-clear') { filter = 0; renderSummary(); renderList(); } });
 $('#rw-sort').addEventListener('change', () => { shown = 3; renderList(); });
 $('#rw-more').addEventListener('click', () => { const from = shown; shown += 3; renderList(); $$('#rw-list .rw-card')[from]?.setAttribute('tabindex', '-1'); $$('#rw-list .rw-card')[from]?.focus(); });
 
@@ -480,7 +456,7 @@ form.addEventListener('submit', e => {
   // the email is only needed for moderation, so it is not kept in the browser
   mine.unshift({ name: n.value.trim(), rating: +picked.value, date: new Date().toISOString().slice(0, 10), text: t.value.trim() });
   save(mine);
-  form.reset(); light(0); filter = 0; shown = 3;
+  form.reset(); light(0); shown = 3;
   openForm(false); renderSummary(); renderList();
   $('#rv-done').hidden = false; $('#rv-done').focus();
 });
