@@ -24,11 +24,23 @@ const P = {
 const SHOP_AT = 'locate.html';
 const url = id => `product.html?p=${P[id][3]}`;
 const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// colour name from the catalogue ("Black Blue", "Clear Pink", "Wine Red") -> CSS swatch; two colours split in half
+const HUE = { black: '#141414', balck: '#141414', blue: '#2456b3', indigo: '#3b3f8f', brown: '#6b4426', copper: '#b06a3b', clear: 'linear-gradient(135deg,#fff 45%,#cfd6da)',
+  green: '#2f7d46', grn: '#2f7d46', violet: '#6b3fa0', purple: '#7a2f8e', wine: '#7d2233', red: '#c4161c', pink: '#e58fb0', peach: '#f2b38f', gray: '#7b7f82',
+  gun: '#55595a', gold: '#c9a050', sliver: '#c4c7c9', silver: '#c4c7c9', white: '#f5f5f5', wellow: '#e2c043', yellow: '#e2c043', mjentha: '#c2307a', camouflage: '#5b5f3a',
+  assorted: 'conic-gradient(#c4161c,#e2c043,#2f7d46,#2456b3,#7a2f8e,#c4161c)' };
+const swatch = name => {
+  const cs = (name || '').toLowerCase().split(/\s+/).map(w => HUE[w]).filter(Boolean);
+  if (!cs.length) return '#9a9a9a';
+  if (cs.length === 1 || cs[0].includes('gradient')) return cs[0];
+  const [a, b] = cs.map(c => c.includes('gradient') ? '#eef1f2' : c);
+  return `linear-gradient(135deg,${a} 50%,${b} 50%)`;
+};
 const card = (id, btn, feat) => {
   const [code, colour, c] = P[id];
   return `<article class="card">
     <a class="ph" href="${url(id)}" tabindex="-1" aria-hidden="true"><img src="img/p/${id}.jpg" alt="" loading="lazy" width="640" height="640"></a>
-    <div class="row"><div><h3><a href="${url(id)}">${code}</a></h3><p class="sw"><i style="--c:${c}"></i>${colour}</p></div>
+    <div class="row"><div><h3><a href="${url(id)}">${code}</a></h3><p class="sw"><i style="--c:${swatch(colour)}"></i>${colour}</p></div>
     <a class="btn ${feat ? 'btn-red' : btn} btn-sm" href="${SHOP_AT}" aria-label="Shop At: find ${code} ${colour} at a CAV shop">Shop At</a></div>
   </article>`;
 };
