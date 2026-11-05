@@ -32,7 +32,6 @@
 .specs div{background:#151515;padding:16px 18px}
 .specs dt{font-size:13px;font-weight:700;color:#9a9a9a;margin-bottom:4px}
 .specs dd{margin:0;font-size:17px;font-weight:600}
-.specs .wide{grid-column:1/-1}
 .specs .av{display:inline-flex;align-items:center;gap:8px}
 .specs .av::before{content:"";width:8px;height:8px;border-radius:50%;background:#3fbf6f}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
@@ -43,10 +42,6 @@
 .meta-l{font-size:15px;color:#9a9a9a;display:flex;flex-wrap:wrap;gap:6px 20px}
 .meta-l b{color:#d9d9d9;font-weight:600}
 .ptabs{background:#fff;color:var(--ink);padding-block:clamp(72px,7vw,104px)}
-.tablist{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-.tablist button{border-radius:999px;padding:12px 22px;font-size:17px;font-weight:600;background:var(--tile);color:var(--ink);transition:background-color .2s,color .2s}
-.tablist button:hover{background:#e6e6e3}
-.tablist button[aria-selected=true]{background:var(--ink);color:#fff}
 .tabp{max-width:820px;font-size:18px;line-height:1.65;color:var(--grey)}
 .tabp[hidden]{display:none}
 .tabp table{width:100%;border-collapse:collapse;font-size:17px}
@@ -125,8 +120,9 @@ root.innerHTML = `
         <div><dt>Colour</dt><dd>${esc(cap(it.c))}</dd></div>
         <div><dt>Size</dt><dd>${esc(cap(it.size))}</dd></div>
         <div><dt>Gender</dt><dd>${esc(cap(it.g))}</dd></div>
+        <div><dt>Shape</dt><dd>${esc(cap(it.shape))}</dd></div>
         <div><dt>Availability</dt><dd>${it.av ? `<span class="av">${esc(it.av)}</span>` : '—'}</dd></div>
-        <div class="wide"><dt>Price</dt><dd>${it.price ? esc(it.price) : 'Price on request'}</dd></div>
+        <div><dt>Price</dt><dd>${it.price ? esc(it.price) : 'Price on request'}</dd></div>
       </dl>
       <div class="cta">
         <a class="btn btn-red btn-lg" href="locate.html">Shop At <span class="arrow" aria-hidden="true">→</span></a>
@@ -137,21 +133,9 @@ root.innerHTML = `
   </div>
 </section>
 
-<section class="ptabs light" aria-label="Product information">
+<section class="ptabs light" aria-label="Reviews">
   <div class="wrap">
-    <div class="tablist" role="tablist" aria-label="Product information">
-      <button role="tab" id="tb-a" aria-controls="tp-a" aria-selected="true">Additional information</button>
-      <button role="tab" id="tb-r" aria-controls="tp-r" aria-selected="false" tabindex="-1">Reviews (0)</button>
-    </div>
-    <div class="tabp" role="tabpanel" id="tp-a" aria-labelledby="tb-a" tabindex="0">
-      <table><tbody>
-        <tr><th scope="row">Color</th><td>${esc(cap(it.col))}</td></tr>
-        <tr><th scope="row">Gender</th><td>${esc(cap(it.g))}</td></tr>
-        <tr><th scope="row">Shape</th><td>${esc(cap(it.shape))}</td></tr>
-        <tr><th scope="row">Material</th><td>${esc(cap(it.mat))}</td></tr>
-      </tbody></table>
-    </div>
-    <div class="tabp" role="tabpanel" id="tp-r" aria-labelledby="tb-r" tabindex="0" hidden>
+    <div class="tabp">
       <h3>Reviews</h3>
       <p>There are no reviews yet. Be the first to review “${esc(it.n)}”.</p>
       <form class="rv-form" id="rv-form" novalidate>
@@ -208,20 +192,6 @@ if (mqFine.matches && !reduced()) {
   });
   stage.addEventListener('mouseleave', () => stage.classList.remove('is-zoom'));
 }
-
-/* ---- tabs ---- */
-const tabs = $$('[role=tab]', root);
-const pick = (t, focus) => {
-  tabs.forEach(b => { const on = b === t; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; $('#' + b.getAttribute('aria-controls')).hidden = !on; });
-  if (focus) t.focus();
-};
-tabs.forEach((t, i) => {
-  t.addEventListener('click', () => pick(t));
-  t.addEventListener('keydown', e => {
-    const to = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
-    if (to === undefined) return; e.preventDefault(); pick(tabs[(to + tabs.length) % tabs.length], true);
-  });
-});
 
 /* ---- review form: stars, required fields; reviews are moderated, so show a pending message ---- */
 const labels = $$('#stars label');
