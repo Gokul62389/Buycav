@@ -42,46 +42,47 @@
 .meta-l{font-size:15px;color:#9a9a9a;display:flex;flex-wrap:wrap;gap:6px 20px}
 .meta-l b{color:#d9d9d9;font-weight:600}
 /* reviews: summary + filters on the left, list on the right */
-.rw{background:#fff;color:var(--ink);padding-block:clamp(72px,7vw,112px)}
-.rw .wrap{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:start}
-.rw-sum{position:sticky;top:120px;display:grid;gap:22px}
-.rw-sum h2{font:700 clamp(36px,3.6vw,52px)/.95 var(--d);letter-spacing:-.03em}
-.rw-avg{display:flex;align-items:center;gap:16px}
-.rw-avg b{font:800 64px/1 var(--d);letter-spacing:-.04em}
-.rw-avg p{font-size:15px;color:var(--grey);margin-top:6px}
+.rw{background:#fff;color:var(--ink);padding-block:clamp(48px,5vw,72px)}
+.rw .wrap{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.rw-sum{position:sticky;top:120px;display:grid;gap:14px}
+.rw-sum h2{font:700 clamp(28px,2.6vw,36px)/1 var(--d);letter-spacing:-.03em}
+.rw-avg{display:flex;align-items:center;gap:12px}
+.rw-avg b{font:800 44px/1 var(--d);letter-spacing:-.04em}
+.rw-avg p{font-size:14px;color:var(--grey);margin-top:4px}
 .rate{position:relative;display:inline-block;width:max-content;justify-self:start;font-size:var(--fs,22px);line-height:1;letter-spacing:2px;color:#d6d6d2}
 .rate::before,.rate i::before{content:"★★★★★"}
 .rate i{position:absolute;inset:0 auto 0 0;width:calc(var(--r)/5*100%);overflow:hidden;color:var(--gold);font-style:normal;white-space:nowrap}
-.rw-bars{display:grid;gap:6px;list-style:none;margin:0;padding:0}
-.rw-bars button{width:100%;display:grid;grid-template-columns:44px 1fr 28px;align-items:center;gap:12px;padding:8px 10px;margin-inline:-10px;border-radius:10px;font-size:15px;font-weight:600;color:var(--ink);transition:background-color .2s}
+.rw-bars{display:grid;gap:0;list-style:none;margin:0;padding:0}
+.rw-bars button{width:100%;display:grid;grid-template-columns:36px 1fr 22px;align-items:center;gap:10px;padding:5px 8px;margin-inline:-8px;border-radius:8px;font-size:14px;font-weight:600;color:var(--ink);transition:background-color .2s}
 .rw-bars button:hover:not(:disabled){background:var(--tile)}
 .rw-bars button[aria-pressed=true]{background:var(--tile)}
 .rw-bars button:disabled{color:#a8a8a4;cursor:default}
-.rw-bars .bar{height:8px;border-radius:99px;background:#ececea;overflow:hidden}
+.rw-bars .bar{height:6px;border-radius:99px;background:#ececea;overflow:hidden}
 .rw-bars .bar i{display:block;height:100%;width:var(--w);background:var(--gold);border-radius:inherit;transition:width .8s var(--ease)}
 .rw-bars .n{text-align:right;color:var(--grey);font-weight:500}
-.rw-main{display:grid;gap:20px;min-width:0}
+.rw-main{display:grid;gap:12px;min-width:0}
 .rw-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px}
-.rw-head p{font-size:16px;color:var(--grey)}
+.rw-head p{font-size:15px;color:var(--grey)}
 .rw-head p button{color:var(--red);font-weight:700;text-decoration:underline;text-underline-offset:3px;margin-left:6px}
 .rw-head .field{grid-auto-flow:column;align-items:center;gap:10px}
-.rw-head select{min-height:44px;padding-block:8px;font-size:15px;width:auto}
-.rw-list{display:grid;gap:14px;list-style:none;margin:0;padding:0}
-.rw-card{background:var(--tile);border-radius:20px;padding:clamp(20px,2.4vw,28px);display:grid;gap:12px;animation:rwIn .5s var(--ease) both;animation-delay:calc(var(--i,0)*60ms)}
+.rw-head select{min-height:38px;padding-block:6px;font-size:14px;width:auto}
+.rw-head .field label{font-size:14px}
+.rw-list{display:grid;gap:10px;list-style:none;margin:0;padding:0}
+.rw-card{background:var(--tile);border-radius:16px;padding:16px 20px;display:grid;gap:6px;animation:rwIn .5s var(--ease) both;animation-delay:calc(var(--i,0)*60ms)}
 @keyframes rwIn{from{opacity:0;transform:translateY(10px)}}
-.rw-card header{display:flex;align-items:center;gap:14px}
-.rw-card .av{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--gold);display:grid;place-items:center;font:700 18px/1 var(--d);flex:none}
-.rw-card .who b{display:block;font-size:17px}
-.rw-card .who span{font-size:14px;color:var(--grey)}
-.rw-card .tag{margin-left:auto;font-size:12px;font-weight:700;border-radius:99px;padding:4px 10px;background:#fff;color:var(--grey);white-space:nowrap}
+.rw-card header{display:flex;align-items:center;gap:10px}
+.rw-card .av{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--gold);display:grid;place-items:center;font:700 15px/1 var(--d);flex:none}
+.rw-card .who b{font-size:15px}
+.rw-card .who span{font-size:13px;color:var(--grey);margin-left:8px}
+.rw-card .tag{margin-left:auto;font-size:11px;font-weight:700;border-radius:99px;padding:4px 10px;background:#fff;color:var(--grey);white-space:nowrap}
 .rw-card .tag.pend{background:#fff4dc;color:#7a5a12}
-.rw-card p{font-size:17px;line-height:1.6;color:#2b2b2b;overflow-wrap:anywhere}
-.rw-empty{background:var(--tile);border-radius:20px;padding:32px;font-size:17px;line-height:1.6;color:var(--grey)}
+.rw-card p{font-size:15px;line-height:1.55;color:#2b2b2b;overflow-wrap:anywhere}
+.rw-empty{background:var(--tile);border-radius:16px;padding:20px;font-size:15px;line-height:1.6;color:var(--grey)}
 .rw-more{justify-self:start}
 .rw-more[hidden]{display:none}
-.rv-form{display:grid;gap:18px;background:var(--tile);border-radius:20px;padding:clamp(20px,2.6vw,32px)}
+.rv-form{display:grid;gap:14px;background:var(--tile);border-radius:16px;padding:clamp(18px,2vw,24px)}
 .rv-form[hidden]{display:none}
-.rv-form h3{font:700 26px/1.1 var(--d)}
+.rv-form h3{font:700 22px/1.1 var(--d)}
 .rv-form .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .rv-form .field input,.rv-form .field textarea{background:#fff}
 .rv-form .acts{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
@@ -89,7 +90,7 @@
 .stars{display:flex;gap:6px;border:0;padding:0;margin:0}
 .stars legend{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:8px;padding:0}
 .stars input{position:absolute;opacity:0;width:1px;height:1px}
-.stars label{font-size:34px;line-height:1;color:#c9c9c4;cursor:pointer;transition:color .15s,transform .15s}
+.stars label{font-size:28px;line-height:1;color:#c9c9c4;cursor:pointer;transition:color .15s,transform .15s}
 .stars label:hover{transform:scale(1.12)}
 .stars .lit{color:var(--gold)}
 .stars input:focus-visible+label{outline:2px solid var(--red);outline-offset:2px;border-radius:4px}
@@ -175,7 +176,7 @@ root.innerHTML = `
       <h2 id="rw-h">Reviews</h2>
       <div class="rw-avg" id="rw-avg"></div>
       <ul class="rw-bars" id="rw-bars" aria-label="Filter reviews by rating"></ul>
-      <button class="btn btn-red btn-lg" type="button" id="rw-write" aria-controls="rv-form" aria-expanded="false" style="justify-self:start">Write a review</button>
+      <button class="btn btn-red btn-sm" type="button" id="rw-write" aria-controls="rv-form" aria-expanded="false" style="justify-self:start">Write a review</button>
     </aside>
     <div class="rw-main">
       <p class="rv-done" id="rv-done" hidden tabindex="-1" role="status">Thank you. Your review is shown below and goes live once CAV approves it.</p>
@@ -197,7 +198,7 @@ root.innerHTML = `
         <div class="field"><label for="rw-sort">Sort by</label><select id="rw-sort"><option value="new">Most recent</option><option value="high">Highest rated</option><option value="low">Lowest rated</option></select></div>
       </div>
       <ul class="rw-list" id="rw-list"></ul>
-      <button class="btn btn-white btn-lg rw-more" type="button" id="rw-more" hidden>Show more reviews</button>
+      <button class="btn btn-white btn-sm rw-more" type="button" id="rw-more" hidden>Show more reviews</button>
     </div>
   </div>
 </section>
@@ -253,7 +254,7 @@ const KEY = 'cav_reviews_' + it.s;
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; } };
 const save = list => { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch {} };
 const approved = REVIEWS[it.s] || SAMPLE;
-let mine = load(), filter = 0, shown = 4;
+let mine = load(), filter = 0, shown = 3;
 const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 const stars = (r, fs) => `<span class="rate" style="--r:${r}${fs ? ';--fs:' + fs : ''}" role="img" aria-label="Rated ${r} out of 5"><i></i></span>`;
 
@@ -281,7 +282,7 @@ const renderList = () => {
       <header><span class="av" aria-hidden="true">${esc(r.name.trim()[0].toUpperCase())}</span>
         <div class="who"><b>${esc(r.name)}</b><span>${fmt(r.date)}</span></div>
         ${r.pending ? '<span class="tag pend">Awaiting approval</span>' : r.sample ? '<span class="tag">Sample</span>' : ''}</header>
-      ${stars(r.rating, '18px')}
+      ${stars(r.rating, '15px')}
       <p>${esc(r.text)}</p></li>`).join('')
     : `<li class="rw-empty">${filter ? 'No reviews with this rating yet.' : `There are no reviews yet. Be the first to review “${esc(it.n)}”.`}</li>`;
   $('#rw-more').hidden = list.length <= shown;
@@ -289,12 +290,12 @@ const renderList = () => {
 renderSummary(); renderList();
 $('#rw-bars').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  filter = filter === +b.dataset.s ? 0 : +b.dataset.s; shown = 4;
+  filter = filter === +b.dataset.s ? 0 : +b.dataset.s; shown = 3;
   renderSummary(); renderList();
 });
 $('#rw-count').addEventListener('click', e => { if (e.target.id === 'rw-clear') { filter = 0; renderSummary(); renderList(); } });
-$('#rw-sort').addEventListener('change', () => { shown = 4; renderList(); });
-$('#rw-more').addEventListener('click', () => { const from = shown; shown += 4; renderList(); $$('#rw-list .rw-card')[from]?.setAttribute('tabindex', '-1'); $$('#rw-list .rw-card')[from]?.focus(); });
+$('#rw-sort').addEventListener('change', () => { shown = 3; renderList(); });
+$('#rw-more').addEventListener('click', () => { const from = shown; shown += 3; renderList(); $$('#rw-list .rw-card')[from]?.setAttribute('tabindex', '-1'); $$('#rw-list .rw-card')[from]?.focus(); });
 
 /* ---- write a review: stars, required fields; reviews are moderated, so they show as awaiting approval ---- */
 const form = $('#rv-form'), write = $('#rw-write');
@@ -322,7 +323,7 @@ form.addEventListener('submit', e => {
   // the email is only needed for moderation, so it is not kept in the browser
   mine.unshift({ name: n.value.trim(), rating: +picked.value, date: new Date().toISOString().slice(0, 10), text: t.value.trim() });
   save(mine);
-  form.reset(); light(0); filter = 0; shown = 4;
+  form.reset(); light(0); filter = 0; shown = 3;
   openForm(false); renderSummary(); renderList();
   $('#rv-done').hidden = false; $('#rv-done').focus();
 });
