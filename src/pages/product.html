@@ -140,12 +140,10 @@ root.innerHTML = `
 <section class="ptabs light" aria-label="Product information">
   <div class="wrap">
     <div class="tablist" role="tablist" aria-label="Product information">
-      <button role="tab" id="tb-d" aria-controls="tp-d" aria-selected="true">Description</button>
-      <button role="tab" id="tb-a" aria-controls="tp-a" aria-selected="false" tabindex="-1">Additional information</button>
+      <button role="tab" id="tb-a" aria-controls="tp-a" aria-selected="true">Additional information</button>
       <button role="tab" id="tb-r" aria-controls="tp-r" aria-selected="false" tabindex="-1">Reviews (0)</button>
     </div>
-    <div class="tabp" role="tabpanel" id="tp-d" aria-labelledby="tb-d" tabindex="0"><p><strong style="color:var(--ink)">Size:</strong> ${esc(cap(it.size))}</p></div>
-    <div class="tabp" role="tabpanel" id="tp-a" aria-labelledby="tb-a" tabindex="0" hidden>
+    <div class="tabp" role="tabpanel" id="tp-a" aria-labelledby="tb-a" tabindex="0">
       <table><tbody>
         <tr><th scope="row">Color</th><td>${esc(cap(it.col))}</td></tr>
         <tr><th scope="row">Gender</th><td>${esc(cap(it.g))}</td></tr>
