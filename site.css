@@ -500,3 +500,7 @@ body{background:#fff;color:var(--ink)}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red)}
 .latest .tabs .pill{background:#fff}
 .latest .tabs button[aria-selected=true],.latest .tabs button[aria-selected=true] .arrow{color:var(--red)}
+@media (max-width:1023px){
+  .latest .tabs{padding-block:4px}
+  .latest .tabs button[aria-selected=true]{background:#fff;border-color:#fff}
+}
