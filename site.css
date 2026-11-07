@@ -477,3 +477,26 @@ html.js .in .mask>span,html.js .mask.in>span{transform:none}
 .slide .copy .line,.slide .copy p{font-style:italic}
 /* cream ribbon tag */
 .ribbon{display:inline-block;background:var(--paper);color:#6d0a15;font:800 15px/1 var(--d);letter-spacing:.24em;text-transform:uppercase;padding:14px 36px;clip-path:polygon(16px 0,calc(100% - 16px) 0,100% 100%,0 100%)}
+
+/* ---------- white + crimson balance (client, Nov 2026): white page, crimson bands ---------- */
+:root{--paper:#fff;--tile:#f7f2ef}
+body{background:#fff;color:var(--ink)}
+.topbar{background:#33060c}
+.masthead{background:linear-gradient(90deg,#7a0b16,#a3111a 50%,#7a0b16);color:#fff}
+.masthead .search form{background:rgba(255,255,255,.14)}
+.masthead .icon-btn{background:rgba(255,255,255,.14)}
+.masthead .icon-btn:hover{background:rgba(255,255,255,.26)}
+.masthead .btn-red{background:#fff;color:var(--red)}
+.masthead .btn-red:hover{background:var(--gold);color:var(--ink)}
+.masthead .nav .ink{background:var(--gold)}
+.hero{color:#fff}
+.cats{background:#fff;color:var(--ink)}
+.cats::before{background:radial-gradient(closest-side,transparent 80%,rgba(196,22,28,.10) 87%,rgba(196,22,28,.03) 91%,transparent 96%)}
+.cats .tile .more{color:var(--red)}
+.count{color:#fff}
+.latest{background:var(--crimson-g);color:#fff}
+.foot{background:#4a0912;color:#fff}
+.field input,.field select,.field textarea{background:var(--tile);color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red)}
+.latest .tabs .pill{background:#fff}
+.latest .tabs button[aria-selected=true],.latest .tabs button[aria-selected=true] .arrow{color:var(--red)}

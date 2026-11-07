@@ -15,13 +15,13 @@
 <!-- Optional tags go here, switched off until the visitor opts in, e.g.
 <script type="text/plain" data-consent="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
 
-<link rel="stylesheet" href="site.css?v=fb8f0d51">
+<link rel="stylesheet" href="site.css?v=76212f30">
 <style>/* ---------- Product detail ---------- */
 .bc{padding-block:24px 8px}
-.bc ol{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:15px;font-weight:500;color:#d6b7ad}
+.bc ol{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:15px;font-weight:500;color:var(--grey)}
 .bc li+li::before{content:"›";margin-right:10px}
 .bc a{transition:color .2s}
-.bc a:hover,.bc [aria-current]{color:#fff}
+.bc a:hover,.bc [aria-current]{color:var(--ink)}
 .pd{padding-block:clamp(32px,3.4vw,48px) clamp(72px,7vw,104px)}
 .pd .wrap{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4.4vw,64px);align-items:start}
 .gal{display:grid;gap:14px}
@@ -40,14 +40,14 @@
 .thumbs button[aria-current=true]{border-color:var(--gold)}
 .thumbs img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transform:scale(1.15)}
 .info{position:sticky;top:24px;display:grid;gap:24px;align-content:start}
-.info .kick{font-size:15px;font-weight:600;color:#d6b7ad}
-.info .kick a{color:#efdcd2;text-decoration:underline;text-underline-offset:3px}
+.info .kick{font-size:15px;font-weight:600;color:var(--grey)}
+.info .kick a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 .info h1{font:700 clamp(48px,5vw,80px)/.92 var(--d);letter-spacing:-.035em}
-.info h1 .c{display:block;color:var(--gold);font-size:.5em;letter-spacing:-.02em;margin-top:10px}
-.info .short{font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:#efdcd2}
-.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:18px;overflow:hidden}
-.specs div{background:#4a0912;padding:16px 18px}
-.specs dt{font-size:13px;font-weight:700;color:#d6b7ad;margin-bottom:4px}
+.info h1 .c{display:block;color:var(--red);font-size:.5em;letter-spacing:-.02em;margin-top:10px}
+.info .short{font-size:clamp(18px,1.5vw,21px);line-height:1.55;color:var(--ink)}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#eadfd9;border-radius:18px;overflow:hidden}
+.specs div{background:var(--tile);padding:16px 18px}
+.specs dt{font-size:13px;font-weight:700;color:var(--grey);margin-bottom:4px}
 .specs dd{margin:0;font-size:17px;font-weight:600}
 .specs .av,.specs .cw{display:flex;align-items:center;gap:8px}
 .specs .av::before{content:"";width:8px;height:8px;border-radius:50%;background:#3fbf6f}
@@ -56,8 +56,8 @@
 .cta .wa-b{background:#fff;color:var(--ink)}
 .cta .wa-b:hover{background:var(--gold)}
 .cta .wa-b svg{width:20px;height:20px;fill:#25d366}
-.meta-l{font-size:15px;color:#d6b7ad;display:flex;flex-wrap:wrap;gap:6px 20px}
-.meta-l b{color:#efdcd2;font-weight:600}
+.meta-l{font-size:15px;color:var(--grey);display:flex;flex-wrap:wrap;gap:6px 20px}
+.meta-l b{color:var(--ink);font-weight:600}
 /* reviews: summary on the left, list on the right */
 .rw{background:var(--paper);color:var(--ink);padding-block:clamp(48px,5vw,72px)}
 .rw .wrap{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
@@ -110,11 +110,11 @@
 .rel h2{margin-bottom:40px}
 .rel .pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:40px 24px}
 .rel .card .ph{background:#f4f4f2}
-.rel .card h3,.rel .card h3 a{color:#fff}
-.rel .sw{color:#ead5cb}
+.rel .card h3,.rel .card h3 a{color:var(--ink)}
+.rel .sw{color:var(--grey)}
 .nf{padding-block:120px;display:grid;justify-items:start;gap:20px}
 .nf h1{font:700 clamp(44px,5vw,72px)/.95 var(--d);letter-spacing:-.03em}
-.nf p{font-size:19px;color:#ead5cb}
+.nf p{font-size:19px;color:var(--grey)}
 @media (max-width:1023px){.pd .wrap{grid-template-columns:1fr}.info{position:static}.rel .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.specs{grid-template-columns:1fr 1fr}.rv-form .two{grid-template-columns:1fr}.rel .card .row{flex-direction:column;align-items:flex-start;gap:12px}.stage .nav-b{opacity:1;width:40px;height:40px;margin-top:-20px}}
 @media (hover:none){.stage{cursor:default}.stage .nav-b{opacity:1}}
