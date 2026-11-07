@@ -505,3 +505,5 @@ body{background:#fff;color:var(--ink)}
   .latest .tabs button[aria-selected=true]{background:#fff;border-color:#fff}
 }
 .hero,.pt{background:#0b0b0b}
+.drawer .panel{color:#fff}
+.latest .tabs button .arrow{color:rgba(255,255,255,.7)}

@@ -4,7 +4,9 @@
 .shop-wrap{display:grid;grid-template-columns:260px minmax(0,1fr);gap:clamp(32px,3.4vw,48px);align-items:start}
 .filters{position:sticky;top:24px;display:grid;gap:28px;max-height:calc(100vh - 48px);overflow:auto;padding:4px 8px 24px 4px;scrollbar-width:thin;scrollbar-color:#7a1a26 transparent}
 .f-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.f-head h2{font:700 28px/1 var(--d);letter-spacing:-.015em}
+.f-head h2{font:700 28px/1 var(--d);letter-spacing:-.015em;margin-right:auto}
+.f-head .f-close{background:var(--tile);color:var(--ink)}
+.f-head .f-close:hover{background:#eadfd9}
 .f-clear{color:var(--red);font-weight:700;font-size:15px;text-decoration:underline;text-underline-offset:3px}
 .f-clear[hidden]{display:none}
 .f-close,.f-apply,.f-open{display:none}
