@@ -117,7 +117,7 @@ body.lock{overflow:hidden}
 .slide .media img{width:100%;height:100%;object-fit:cover;transform:scale(1.1);transition:transform 0s .9s}
 .slide.is-on .media img{transform:scale(1);transition:transform 9s cubic-bezier(.2,.6,.25,1)}
 .slide.is-leaving .media img{transform:scale(1);transition:none}
-.slide .scrim{ /* taste-skill-ignore: scrim keeps white type readable on any photo (approved design) */ position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,4,10,.55) 0%,rgba(42,4,10,.1) 40%,rgba(42,4,10,.7) 100%)}
+.slide .scrim{ /* taste-skill-ignore: scrim keeps white type readable on any photo (approved design) */ position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.55) 0%,rgba(10,10,10,.1) 40%,rgba(10,10,10,.7) 100%)}
 .slide .copy{position:absolute;left:max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)));top:clamp(32px,4vw,56px);max-width:min(480px,calc(100% - 2*var(--pad)));display:grid;gap:20px;justify-items:start;z-index:3}
 .slide .s-title{font:700 clamp(44px,4.45vw,64px)/.9 var(--d);letter-spacing:-.025em}
 .slide .copy p,.slide .copy .line{font:400 clamp(17px,1.4vw,20px)/1.5 var(--b)}
@@ -504,3 +504,4 @@ body{background:#fff;color:var(--ink)}
   .latest .tabs{padding-block:4px}
   .latest .tabs button[aria-selected=true]{background:#fff;border-color:#fff}
 }
+.hero,.pt{background:#0b0b0b}
