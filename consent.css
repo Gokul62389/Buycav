@@ -1,17 +1,17 @@
 /* CAV cookie consent: banner + preferences dialog. Shared by the homepage and the policy pages. */
-.cc{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:70;width:min(440px,calc(100vw - 32px));background:#151515;color:#fff;border-radius:20px;padding:24px;display:grid;gap:16px;border:1px solid rgba(255,255,255,.14);font-family:"Manrope",system-ui,sans-serif;transform:translateY(calc(100% + 32px));opacity:0;visibility:hidden;transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s,visibility 0s .6s} /* taste-skill-ignore: a floating panel needs an edge on the black page */
+.cc{position:fixed;left:max(16px,env(safe-area-inset-left));bottom:max(16px,env(safe-area-inset-bottom));z-index:70;width:min(440px,calc(100vw - 32px));background:#42080f;color:#fff;border-radius:20px;padding:24px;display:grid;gap:16px;border:1px solid rgba(255,255,255,.14);font-family:"Manrope",system-ui,sans-serif;transform:translateY(calc(100% + 32px));opacity:0;visibility:hidden;transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s,visibility 0s .6s} /* taste-skill-ignore: a floating panel needs an edge on the black page */
 .cc.is-open{transform:none;opacity:1;visibility:visible;transition:transform .6s cubic-bezier(.22,1,.36,1),opacity .4s}
 .cc h2{margin:0;font:700 24px/1.1 "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.015em}
-.cc p{margin:0;font-size:15px;line-height:1.55;color:#d9d9d9}
+.cc p{margin:0;font-size:15px;line-height:1.55;color:#efdcd2}
 .cc p a{color:#fff;text-decoration:underline;text-underline-offset:3px}
 .cc-acts{display:flex;flex-wrap:wrap;gap:8px}
 .cc-btn{flex:1 1 auto;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;font:700 15px/1.2 "Manrope",system-ui,sans-serif;padding:13px 18px;cursor:pointer;white-space:nowrap;transition:background-color .2s,color .2s,transform .2s cubic-bezier(.22,1,.36,1)}
 .cc-btn:active{transform:scale(.97)}
 /* accept and reject get equal weight, as consent rules require */
 .cc-solid{background:#fff;color:#151515}
-.cc-solid:hover{background:#efbc61}
-.cc-link{justify-self:start;background:none;border:0;padding:0;cursor:pointer;font:700 15px/1.4 "Manrope",system-ui,sans-serif;color:#efbc61;text-decoration:underline;text-underline-offset:3px}
-.cc :focus-visible,.cc-dlg :focus-visible{outline:2px solid #efbc61;outline-offset:3px;border-radius:8px}
+.cc-solid:hover{background:#e2b25c}
+.cc-link{justify-self:start;background:none;border:0;padding:0;cursor:pointer;font:700 15px/1.4 "Manrope",system-ui,sans-serif;color:#e2b25c;text-decoration:underline;text-underline-offset:3px}
+.cc :focus-visible,.cc-dlg :focus-visible{outline:2px solid #e2b25c;outline-offset:3px;border-radius:8px}
 .cc-dlg{border:0;padding:0;border-radius:24px;width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);background:#fff;color:#151515;font-family:"Manrope",system-ui,sans-serif}
 .cc-dlg::backdrop{background:rgba(0,0,0,.6)}
 .cc-dlg[open]{animation:cc-in .45s cubic-bezier(.22,1,.36,1)}
@@ -34,10 +34,10 @@
 .cc-sw input:checked+i::after{transform:translateX(22px)}
 .cc-sw input:focus-visible+i{outline:2px solid #b3261e;outline-offset:3px}
 .cc-dlg .cc-btn{background:#f2f2f0;color:#151515}
-.cc-dlg .cc-btn:hover{background:#151515;color:#fff}
+.cc-dlg .cc-btn:hover{background:#42080f;color:#fff}
 .cc-dlg .cc-btn.cc-red{background:#b3261e;color:#fff}
 .cc-dlg .cc-btn.cc-red:hover{background:#97201a}
-.cc-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,20px);opacity:0;background:#151515;color:#fff;font:700 15px/1.3 "Manrope",system-ui,sans-serif;padding:12px 20px;border-radius:999px;transition:opacity .3s,transform .4s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.cc-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,20px);opacity:0;background:#42080f;color:#fff;font:700 15px/1.3 "Manrope",system-ui,sans-serif;padding:12px 20px;border-radius:999px;transition:opacity .3s,transform .4s cubic-bezier(.22,1,.36,1);pointer-events:none}
 .cc-toast.is-on{opacity:1;transform:translate(-50%,0)}
 @media (max-width:560px){
   .cc{left:0;right:0;bottom:0;width:100%;border-radius:20px 20px 0 0;padding:20px 16px max(20px,env(safe-area-inset-bottom))}

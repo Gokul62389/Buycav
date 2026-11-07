@@ -1,9 +1,9 @@
 /* Shared layout for the CAV privacy and cookie policy pages */
-:root{--black:#0b0b0b;--ink:#151515;--red:#b3261e;--gold:#efbc61;--tile:#f2f2f0;--grey:#555;--d:"Bricolage Grotesque",system-ui,sans-serif;--b:"Manrope",system-ui,sans-serif;--pad:clamp(16px,3.34vw,48px)}
+:root{--black:#42080f;--ink:#2a0509;--red:#c4161c;--gold:#e2b25c;--tile:#f3e6d2;--grey:#6b4f49;--d:"Bricolage Grotesque",system-ui,sans-serif;--b:"Manrope",system-ui,sans-serif;--pad:clamp(16px,3.34vw,48px)}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:24px;scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:#fff;color:var(--ink);font:400 17px/1.65 var(--b);-webkit-font-smoothing:antialiased}
+body{margin:0;background:#fbf3e6;color:var(--ink);font:400 17px/1.65 var(--b);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
 button{font:inherit;cursor:pointer}
@@ -14,7 +14,7 @@ button{font:inherit;cursor:pointer}
 .ph-head{background:var(--black);color:#fff}
 .ph-head .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px}
 .ph-head :focus-visible{outline-color:var(--gold)}
-.back{font-weight:700;text-decoration:none;color:#d9d9d9;transition:color .2s}
+.back{font-weight:700;text-decoration:none;color:#efdcd2;transition:color .2s}
 .back:hover{color:#fff}
 .doc{max-width:calc(760px + 2*var(--pad));padding-block:clamp(56px,7vw,96px)}
 .doc h1{font:800 clamp(44px,6vw,80px)/.95 var(--d);letter-spacing:-.04em;margin:0}
@@ -50,6 +50,6 @@ button.inline{background:none;border:0;padding:0;font-weight:700;color:inherit;t
 .ph-foot nav{display:flex;flex-wrap:wrap;gap:4px 20px}
 .ph-foot nav a,.ph-foot nav button{background:none;border:0;padding:0;color:#fff;font-size:14px;font-weight:700;text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(255,255,255,.4)}
 .ph-foot nav a[aria-current]{text-decoration-color:#fff}
-.ph-foot small{font-size:14px;color:#9a9a9a}
+.ph-foot small{font-size:14px;color:#d6b7ad}
 .ph-foot :focus-visible{outline-color:var(--gold)}
 @media (max-width:640px){.toc ol{columns:1}th,td{padding:10px 12px}}
