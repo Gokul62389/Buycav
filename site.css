@@ -197,10 +197,12 @@ body.lock{overflow:hidden}
 .tile.is-open .more .all,.tile:focus-within .more .all{display:inline}
 @media (hover:hover) and (pointer:fine){.tile:hover .more .one{display:none}.tile:hover .more .all{display:inline}}
 
-/* ---------- 6 · 279+ ---------- */
+/* ---------- 6 · 369+ ---------- */
 .count{background:var(--red)}
 .count .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,620px);gap:48px;align-items:start;padding-block:64px}
-.count .num{font:800 clamp(140px,24.3vw,350px)/.8 var(--d);letter-spacing:-.06em;white-space:nowrap;margin-left:-.03em;font-variant-numeric:tabular-nums}
+/* "369+" is ~2em wide: never let it be wider than its own column (it ran under the photo at ~1100–1300px) */
+.count .rv{container-type:inline-size}
+.count .num{font:800 min(clamp(140px,24.3vw,350px),48cqi)/.8 var(--d);letter-spacing:-.06em;white-space:nowrap;margin-left:-.03em;font-variant-numeric:tabular-nums}
 .count .num .n{display:inline-block;text-align:right}
 .count h2{font:700 clamp(44px,5vw,72px)/.92 var(--d);letter-spacing:-.03em;margin-top:clamp(20px,2.3vw,34px)}
 .count .btn{margin-top:clamp(24px,2.3vw,32px);color:var(--red)}
@@ -495,7 +497,7 @@ body{background:#fff;color:var(--ink)}
 .cats .tile .more{color:var(--red)}
 .count{color:#fff}
 .latest{background:var(--crimson-g);color:#fff}
-.foot{background:#4a0912;color:#fff}
+.foot{background:linear-gradient(90deg,#7a0b16,#a3111a 50%,#7a0b16);color:#fff} /* same as navbar */
 .field input,.field select,.field textarea{background:var(--tile);color:var(--ink)}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red)}
 .latest .tabs .pill{background:#fff}
@@ -507,3 +509,14 @@ body{background:#fff;color:var(--ink)}
 .hero,.pt{background:#0b0b0b}
 .drawer .panel{color:#fff}
 .latest .tabs button .arrow{color:rgba(255,255,255,.7)}
+
+/* ---------- touch screens: every link and button at least 44px tall to tap (WCAG 2.5.5) ---------- */
+.recent .bar{flex-wrap:wrap} /* at 320px the arrows drop under the title instead of poking off-screen */
+@media (pointer:coarse){
+  .topbar .wrap{padding-block:0}
+  .topbar a{min-height:44px;min-width:44px}
+  .slides-ui button.tab{min-height:44px;min-width:44px;justify-content:center}
+  .tile .more,.foot address a{display:inline-flex;align-items:center;min-height:44px}
+  .foot address{gap:0}
+  .legal nav a,.legal nav button{display:inline-flex;align-items:center;min-height:44px}
+}

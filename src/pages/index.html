@@ -1,4 +1,4 @@
-<!--{"title": "CAV \u00b7 Stylish quality eyewear", "desc": "CAV eyeglass frames by BOSYM. Browse 279+ frames and find a CAV shop near you.", "preload": "img/hero-trend.webp", "nav": "index.html"}-->
+<!--{"title": "CAV \u00b7 Stylish quality eyewear", "desc": "CAV eyeglass frames by BOSYM. Browse 369+ frames and find a CAV shop near you.", "preload": "img/hero-trend.webp", "nav": "index.html"}-->
 <!--MAIN-->
 <main id="main">
 <span id="top"></span>
@@ -157,8 +157,8 @@
 <section class="count" aria-labelledby="count-h">
   <div class="wrap">
     <div class="rv">
-      <p class="num" aria-hidden="true"><span class="n" data-to="279">279</span>+</p>
-      <h2 id="count-h"><span class="sr">279+ </span>Frames</h2>
+      <p class="num" aria-hidden="true"><span class="n" data-to="369">369</span>+</p>
+      <h2 id="count-h"><span class="sr">369+ </span>Frames</h2>
       <a class="btn btn-white btn-lg" href="shop.html">See all frames <span class="arrow" aria-hidden="true">→</span></a>
     </div>
     <div class="panel-img"><img src="img/frames-panel.webp" alt="Three CAV frames in black, brown and clear" width="1240" height="1240" loading="lazy"></div>
@@ -228,7 +228,7 @@
 const rail = $('#rail'), track = $('#track'), status = $('#rail-status');
 const RECENT = ['279A','278A','277A','276A','275A','32A','96A'];
 track.innerHTML = RECENT.map(id => `<li>${card(id, 'btn-tile')}</li>`).join('')
-  + `<li class="all"><a class="all-card" href="shop.html"><span class="n">279+</span><b>View all products <span class="go" aria-hidden="true"><svg class="ico"><use href="#i-right"/></svg></span></b></a></li>`;
+  + `<li class="all"><a class="all-card" href="shop.html"><span class="n">369+</span><b>View all products <span class="go" aria-hidden="true"><svg class="ico"><use href="#i-right"/></svg></span></b></a></li>`;
 const items = [...track.children].filter(li => !li.classList.contains('all'));
 const [prev, next] = $$('.arrows button');
 let at = 0;
@@ -455,7 +455,7 @@ syncPill();
   document.addEventListener('pointerdown', e => { tiles.forEach(t => { if (!t.contains(e.target)) set(t, false); }); });
 }
 
-/* ---- 279+ count-up ---- */
+/* ---- 369+ count-up ---- */
 {
   const n = $('.count .n'), to = +n.dataset.to;
   // reserve the final width in em so it scales with the font on resize/rotate (no jump while counting)

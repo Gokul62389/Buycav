@@ -53,3 +53,6 @@ button.inline{background:none;border:0;padding:0;font-weight:700;color:inherit;t
 .ph-foot small{font-size:14px;color:#d6b7ad}
 .ph-foot :focus-visible{outline-color:var(--gold)}
 @media (max-width:640px){.toc ol{columns:1}th,td{padding:10px 12px}}
+
+/* touch screens: links big enough to tap */
+@media (pointer:coarse){.toc a,.back,button.inline,.ph-foot nav a,.ph-foot nav button{display:inline-flex;align-items:center;min-height:44px}.toc li{margin-bottom:0}}

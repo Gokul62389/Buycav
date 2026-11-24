@@ -65,7 +65,7 @@
 .rw-card .av{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--gold);display:grid;place-items:center;font:700 15px/1 var(--d);flex:none}
 .rw-card .who b{font-size:15px}
 .rw-card .who span{font-size:13px;color:var(--grey);margin-left:8px}
-.rw-card .tag{margin-left:auto;font-size:11px;font-weight:700;border-radius:99px;padding:4px 10px;background:#fff;color:var(--grey);white-space:nowrap}
+.rw-card .tag{margin-left:auto;font-size:12px;font-weight:700;border-radius:99px;padding:4px 10px;background:#fff;color:var(--grey);white-space:nowrap}
 .rw-card .tag.pend{background:#fff4dc;color:#7a5a12}
 .rw-card p{font-size:15px;line-height:1.55;color:var(--ink);overflow-wrap:anywhere}
 .rw-empty{background:var(--tile);border-radius:16px;padding:20px;font-size:15px;line-height:1.6;color:var(--grey)}
@@ -121,7 +121,7 @@ if (!it) {
   return;
 }
 document.title = `${it.n} · CAV`;
-const wa = 'https://wa.me/914843160620?text=' + encodeURIComponent(`Hello, I’d like to know more about the CAV frame ${it.n}. ${location.href.split('?')[0]}?p=${it.s}`);
+const wa = 'https://wa.me/918086074440?text=' + encodeURIComponent(`Hello, I’d like to know more about the CAV frame ${it.n}. ${location.href.split('?')[0]}?p=${it.s}`);
 const imgs = Array.from({ length: it.i }, (_, k) => `img/c/${it.s}-${k}.jpg`);
 const views = ['Front view', 'Side view', 'Folded view'];
 const related = CATALOG.filter(x => x.s !== it.s && x.g === it.g && x.shape === it.shape).slice(0, 4);

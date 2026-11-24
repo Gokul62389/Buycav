@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Contact Us · CAV</title>
-<meta name="description" content="Contact CAV eyewear (BOSYM Pvt Ltd, Edappally, Kochi): send a message or find us on the map.">
+<meta name="description" content="Contact CAV eyewear (BOSYM Pvt Ltd, Edappally, Kochi): send a message.">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,32 +15,45 @@
 <!-- Optional tags go here, switched off until the visitor opts in, e.g.
 <script type="text/plain" data-consent="analytics" src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script> -->
 <link rel="preload" as="image" href="img/cat-men.webp" fetchpriority="high">
-<link rel="stylesheet" href="site.css?v=12c761e4">
-<style>/* ---------- Contact Us ---------- */
-.ct{background:var(--paper);color:var(--ink);padding-block:clamp(80px,9vw,128px)}
-.ct .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,4.4vw,64px);align-items:start}
-.ct h2{font:700 clamp(40px,4.45vw,64px)/.95 var(--d);letter-spacing:-.03em;margin-bottom:32px}
-.ct form{display:grid;gap:20px}
+<link rel="stylesheet" href="site.css?v=7c85b367">
+<style>/* ---------- Contact Us: crimson band, direct lines on the left, white form card on the right ---------- */
+.ct{position:relative;isolation:isolate;overflow:clip;background:var(--crimson-g);color:#fff;padding-block:clamp(72px,8.5vw,128px)}
+.ct::before{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;width:min(1200px,95vw);aspect-ratio:1;left:-32%;bottom:-62%;background:radial-gradient(closest-side,transparent 80%,rgba(255,150,150,.2) 87%,rgba(255,210,210,.06) 91%,transparent 96%)}
+.ct .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(40px,5vw,88px);align-items:start}
+.ct-side{display:grid;gap:28px;justify-items:start}
+.ct-side .h2{color:#fff}
+.ct-side .lead{font-size:clamp(18px,1.5vw,20px);line-height:1.6;font-style:italic;color:#f4dcd3;max-width:440px}
+.lines{display:grid;gap:12px;width:100%;max-width:460px}
+.line{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:16px;padding:14px 18px 14px 14px;border-radius:18px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);transition:background-color .25s,border-color .25s,transform .25s var(--ease)}
+a.line:hover{background:rgba(255,255,255,.14);border-color:rgba(226,178,92,.7)}
+a.line:active{transform:scale(.985)}
+.line .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--gold-g);color:#33060c}
+.line .ic .ico{width:22px;height:22px;stroke-width:1.8}
+.line small{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.line b{display:block;font:700 19px/1.25 var(--d);letter-spacing:-.005em;overflow-wrap:anywhere}
+.line span.addr{display:block;font-size:15px;line-height:1.5;color:#f4dcd3}
+.line .go{color:var(--gold);font-size:20px;transition:transform .25s var(--ease)}
+a.line:hover .go{transform:translateX(4px)}
+.card-f{background:#fff;color:var(--ink);border-radius:28px;padding:clamp(24px,3.4vw,48px);box-shadow:0 40px 80px -32px rgba(20,0,4,.6),0 0 0 1px rgba(226,178,92,.35)}
+.card-f h3{font:800 clamp(28px,2.6vw,36px)/1 var(--d);letter-spacing:-.01em;text-transform:uppercase}
+.card-f h3::after{content:"";display:block;width:64px;height:3px;margin-top:16px;border-radius:2px;background:var(--gold-g)}
+.card-f .sub{margin:14px 0 28px;color:var(--grey);font-size:16px;line-height:1.55}
+.ct form{display:grid;gap:18px}
 .ct form[hidden]{display:none}
-.ct .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.ct .send{justify-self:start;margin-top:4px}
+.ct .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.ct .field label{color:var(--ink)}
+.ct .field input,.ct .field textarea{border-radius:14px}
+.ct .foot-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-top:6px}
 .ct .note{font-size:14px;color:var(--grey)}
-.done{display:grid;gap:12px;background:var(--tile);border-radius:20px;padding:28px}
+.field label .opt{font-weight:500;color:var(--grey)}
+.done{display:grid;gap:14px;justify-items:start}
 .done[hidden]{display:none}
-.done b{font:700 28px/1.1 var(--d);letter-spacing:-.015em}
+.done .tick{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:var(--gold-g);color:#33060c;font-size:30px;font-weight:800}
+.done b{font:800 30px/1.05 var(--d);letter-spacing:-.01em;text-transform:uppercase}
 .done p{font-size:17px;line-height:1.6;color:var(--grey)}
 .done a{color:var(--red);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-.map{position:sticky;top:24px;border-radius:24px;overflow:hidden;background:#e9e9e6;aspect-ratio:4/5}
-.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.map .find{position:absolute;left:16px;right:16px;bottom:34px;display:grid;gap:10px;background:var(--black);color:#fff;border-radius:18px;padding:20px 22px}
-.map h3{font:700 24px/1.1 var(--d);letter-spacing:-.015em}
-.map address{font-style:normal;font-size:16px;line-height:1.55;color:#ead5cb}
-.map .find a{justify-self:start;color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:3px}
-@media (max-width:900px){
-  .ct .wrap{grid-template-columns:1fr}
-  .map{position:relative;top:auto;aspect-ratio:4/3}
-}
-@media (max-width:560px){.ct .two{grid-template-columns:1fr}.map{aspect-ratio:3/4}}
+@media (max-width:1023px){.ct .wrap{grid-template-columns:1fr}.lines{max-width:none;grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.lines{grid-template-columns:1fr}.line{grid-template-columns:48px minmax(0,1fr);gap:14px}.line .ic{width:48px;height:48px}.line .go{display:none}.line b{font-size:17px}.ct .two{grid-template-columns:1fr}.ct .send{width:100%}}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -65,7 +78,7 @@
   <div class="wrap">
     <div class="grp">
       <a class="mail" href="mailto:main@bosymcorp.com"><svg class="ico"><use href="#i-mail"/></svg>main@bosymcorp.com</a>
-      <a class="phone" href="tel:+914843160620" aria-label="Call +91 484 316 0620"><svg class="ico"><use href="#i-phone"/></svg><span>+91 484 316 0620</span></a>
+      <a class="phone" href="tel:+918075946590" aria-label="Call +91 80759 46590"><svg class="ico"><use href="#i-phone"/></svg><span>+91 80759 46590</span></a>
     </div>
     <a href="locate.html"><svg class="ico"><use href="#i-pin"/></svg>Find a CAV shop near you <span class="arrow" aria-hidden="true">→</span></a>
   </div>
@@ -137,7 +150,7 @@
     <a class="btn btn-red btn-lg" href="locate.html">Shop At · find a CAV shop</a>
     <div class="meta">
       <a href="mailto:main@bosymcorp.com"><svg class="ico"><use href="#i-mail"/></svg>main@bosymcorp.com</a>
-      <a href="tel:+914843160620"><svg class="ico"><use href="#i-phone"/></svg>+91 484 316 0620</a>
+      <a href="tel:+918075946590"><svg class="ico"><use href="#i-phone"/></svg>+91 80759 46590</a>
     </div>
   </div>
 </div>
@@ -153,12 +166,27 @@
   <h1 class="word" id="pt-h1" aria-label="Contact Us"><span aria-hidden="true"><span class="ch" style="--i:0">C</span><span class="ch" style="--i:1">o</span><span class="ch" style="--i:2">n</span><span class="ch" style="--i:3">t</span><span class="ch" style="--i:4">a</span><span class="ch" style="--i:5">c</span><span class="ch" style="--i:6">t</span> <span class="ch" style="--i:8">U</span><span class="ch" style="--i:9">s</span></span></h1>
 </section>
 
-<!-- Live: Google map + "Contact Form" (name, email, subject, message, Send) -->
-<section class="ct light" aria-labelledby="ct-h2">
+<!-- Live: "Contact Form" (name, email, subject, message, Send); client: phone/WhatsApp required, email optional -->
+<section class="ct" aria-labelledby="ct-h2">
   <div class="wrap">
-    <div>
-      <h2 class="rv" id="ct-h2"><span class="mask"><span>Contact Form</span></span></h2>
-      <form id="ct-form" class="rv" style="--dl:1" novalidate>
+    <div class="ct-side">
+      <span class="ribbon rv">Get in touch</span>
+      <h2 class="h2 rv" id="ct-h2" style="--dl:1"><span class="mask"><span>Let’s talk</span></span><span class="mask"><span>frames</span></span></h2>
+      <p class="lead rv" style="--dl:2">Ask about a frame, a colour or a CAV shop near you. Message us here, or reach us directly.</p>
+      <div class="lines rv" style="--dl:3">
+        <a class="line" href="https://wa.me/918086074440" target="_blank" rel="noopener"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#i-wa"/></svg></span><span><small>WhatsApp</small><b>+91 80860 74440</b></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="line" href="tel:+918075946590"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#i-phone"/></svg></span><span><small>Call</small><b>+91 80759 46590</b></span><span class="go" aria-hidden="true">→</span></a>
+        <a class="line" href="mailto:main@bosymcorp.com"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#i-mail"/></svg></span><span><small>Email</small><b>main@bosymcorp.com</b></span><span class="go" aria-hidden="true">→</span></a>
+        <div class="line"><span class="ic"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg></span><span><small>Visit</small><span class="addr">2nd Floor A6, Manglavil Apartments, 1 Temple Road, Edappally, Kochi 682024</span></span></div>
+      </div>
+    </div>
+
+    <div class="card-f rv" style="--dl:2">
+      <form id="ct-form" novalidate>
+        <div>
+          <h3>Send a message</h3>
+          <p class="sub">We’ll get back to you on your phone or WhatsApp.</p>
+        </div>
         <div class="two">
           <div class="field">
             <label for="f-name">Your Name <span class="req" aria-hidden="true">*</span><span class="sr">(required)</span></label>
@@ -166,36 +194,36 @@
             <p class="err" id="e-name" aria-live="polite"></p>
           </div>
           <div class="field">
-            <label for="f-email">Your Email <span class="req" aria-hidden="true">*</span><span class="sr">(required)</span></label>
-            <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+            <label for="f-phone">Phone / WhatsApp <span class="req" aria-hidden="true">*</span><span class="sr">(required)</span></label>
+            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91" required aria-describedby="e-phone">
+            <p class="err" id="e-phone" aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field">
+            <label for="f-email">Your Email <span class="opt">(optional)</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" aria-describedby="e-email">
             <p class="err" id="e-email" aria-live="polite"></p>
+          </div>
+          <div class="field">
+            <label for="f-subject">Subject</label>
+            <input id="f-subject" name="subject">
           </div>
         </div>
         <div class="field">
-          <label for="f-subject">Subject</label>
-          <input id="f-subject" name="subject">
-        </div>
-        <div class="field">
           <label for="f-msg">Your Message</label>
-          <textarea id="f-msg" name="message" rows="6"></textarea>
+          <textarea id="f-msg" name="message" rows="5"></textarea>
         </div>
-        <button class="btn btn-red btn-lg send" type="submit">Send <span class="arrow" aria-hidden="true">→</span></button>
-        <p class="note">Fields marked * are required.</p>
+        <div class="foot-row">
+          <button class="btn btn-red btn-lg send" type="submit">Send message <span class="arrow" aria-hidden="true">→</span></button>
+          <p class="note">Fields marked * are required.</p>
+        </div>
       </form>
       <div class="done" id="ct-done" hidden tabindex="-1" role="status">
+        <span class="tick" aria-hidden="true">✓</span>
         <b>Thank you<span id="ct-who"></span>.</b>
-        <p>Your email app should open with your message to CAV. If it didn’t, write to us at <a href="mailto:main@bosymcorp.com">main@bosymcorp.com</a> or call <a href="tel:+914843160620">+91 484 316 0620</a>.</p>
+        <p>Your email app should open with your message to CAV. If it didn’t, write to us at <a href="mailto:main@bosymcorp.com">main@bosymcorp.com</a> or call <a href="tel:+918075946590">+91 80759 46590</a>.</p>
         <p><button class="btn btn-tile btn-md" type="button" id="ct-again">Write another message</button></p>
-      </div>
-    </div>
-
-    <div class="map rv" style="--dl:2" id="map">
-      <iframe title="Map: BOSYM, Manglavil Apartments, Edappally, Kochi" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.7875631403817!2d76.31393727629215!3d10.03438157243958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080db4c5ca367f%3A0x2e2fab4c085c29cf!2sManglavil%20Apartments!5e0!3m2!1sen!2sin!4v1693905460877!5m2!1sen!2sin"></iframe>
-      <div class="find">
-        <h3>Find us</h3>
-        <address>2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024</address>
-        <a href="https://www.google.com/maps/search/?api=1&query=Manglavil+Apartments+Edappally+Kochi" target="_blank" rel="noopener">Directions in Google Maps ↗</a>
       </div>
     </div>
   </div>
@@ -214,16 +242,15 @@
         <h3>Find us</h3>
         <address>
           <span>2nd Floor A6, Manglavil Apartments, near Dream Flower Velvetude, 1 Temple Road, Koonamthai, Edappally, Kochi 682024</span>
-          <a href="tel:+914843160620">+91 484 316 0620</a>
+          <a href="tel:+918075946590">+91 80759 46590</a>
           <a href="mailto:main@bosymcorp.com">main@bosymcorp.com</a>
-          <a href="https://www.bosymcorp.com/" rel="noopener">www.bosymcorp.com</a>
         </address>
       </div>
       <div class="rv" style="--dl:2">
         <h3>Stay connected</h3>
         <div class="social">
-          <a href="https://www.facebook.com/" aria-label="CAV on Facebook" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.2 18v-7h2.3l.4-2.8h-2.7V6.5c0-.8.3-1.3 1.4-1.3H14V2.7a19 19 0 0 0-2.1-.1c-2.1 0-3.5 1.3-3.5 3.6v2H6V11h2.4v7z"/></svg></a>
-          <a href="https://www.instagram.com/" aria-label="CAV on Instagram" rel="noopener"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="15" height="15" rx="4.5"/><circle cx="10" cy="10" r="3.4"/><circle cx="14.6" cy="5.4" r=".6" fill="currentColor"/></svg></a>
+          <a href="https://www.facebook.com/caveyewear" aria-label="CAV on Facebook" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M11.2 18v-7h2.3l.4-2.8h-2.7V6.5c0-.8.3-1.3 1.4-1.3H14V2.7a19 19 0 0 0-2.1-.1c-2.1 0-3.5 1.3-3.5 3.6v2H6V11h2.4v7z"/></svg></a>
+          <a href="https://www.instagram.com/caveyewear/" aria-label="CAV on Instagram" rel="noopener"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="2.5" width="15" height="15" rx="4.5"/><circle cx="10" cy="10" r="3.4"/><circle cx="14.6" cy="5.4" r=".6" fill="currentColor"/></svg></a>
           <a href="https://www.youtube.com/" aria-label="CAV on YouTube" rel="noopener"><svg viewBox="0 0 20 20" fill="currentColor"><path d="M18.6 6.2a2.2 2.2 0 0 0-1.6-1.6C15.6 4.2 10 4.2 10 4.2s-5.6 0-7 .4A2.2 2.2 0 0 0 1.4 6.2 23 23 0 0 0 1 10a23 23 0 0 0 .4 3.8A2.2 2.2 0 0 0 3 15.4c1.4.4 7 .4 7 .4s5.6 0 7-.4a2.2 2.2 0 0 0 1.6-1.6A23 23 0 0 0 19 10a23 23 0 0 0-.4-3.8zM8.2 12.4V7.6L12.9 10z"/></svg></a>
         </div>
       </div>
@@ -238,12 +265,12 @@
 </footer>
 
 <!-- 14 · Floating WhatsApp -->
-<a class="wa" id="wa" href="https://wa.me/914843160620?text=Hello%2C%20I%20need%20to%20know%20more%20about%20CAV%20frames" target="_blank" rel="noopener" aria-label="Chat with CAV on WhatsApp">
+<a class="wa" id="wa" href="https://wa.me/918086074440?text=Hello%2C%20I%20need%20to%20know%20more%20about%20CAV%20frames" target="_blank" rel="noopener" aria-label="Chat with CAV on WhatsApp">
   <span class="dot"><svg viewBox="0 0 24 24"><use href="#i-wa"/></svg></span><span class="t">Chat on WhatsApp</span>
 </a>
 
 <script src="catalog.js?v=df923635"></script>
-<script src="site.js?v=ab1ec98c"></script>
+<script src="site.js?v=5a1d790e"></script>
 <script>
 (() => {
 'use strict';
@@ -256,11 +283,13 @@ const show = (input, msg) => {
 };
 const check = input => {
   const v = input.value.trim();
-  if (input.required && !v) return show(input, input.name === 'name' ? 'Please enter your name.' : 'Please enter your email.'), false;
+  if (input.required && !v) return show(input, input.name === 'name' ? 'Please enter your name.' : 'Please enter your phone or WhatsApp number.'), false;
+  // phone: digits with optional +, spaces, dashes, brackets; 10-15 digits covers Indian mobiles with or without +91
+  if (input.type === 'tel' && v && (!/^\+?[\d\s\-()]+$/.test(v) || !/^\d{10,15}$/.test(v.replace(/\D/g, '')))) return show(input, 'Please enter a valid number, like +91 98765 43210.'), false;
   if (input.type === 'email' && v && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) return show(input, 'Please enter a valid email, like name@example.com.'), false;
   show(input, ''); return true;
 };
-const required = $$('[required]', form);
+const required = $$('[required], [type=email]', form); // email is optional but still checked when filled in
 // re-check a field as the visitor fixes it, once it has been flagged
 required.forEach(i => i.addEventListener('input', () => { if (i.getAttribute('aria-invalid') === 'true') check(i); }));
 required.forEach(i => i.addEventListener('blur', () => { if (i.value.trim()) check(i); }));
@@ -270,7 +299,7 @@ form.addEventListener('submit', e => {
   if (bad.length) { bad[0].focus(); return; }
   const d = Object.fromEntries(new FormData(form));
   const subject = d.subject.trim() || 'Message from the CAV website';
-  const body = `${d.message.trim()}\n\n${d.name.trim()}\n${d.email.trim()}`;
+  const body = `${d.message.trim()}\n\n${d.name.trim()}\nPhone / WhatsApp: ${d.phone.trim()}${d.email.trim() ? '\nEmail: ' + d.email.trim() : ''}`;
   location.href = `mailto:main@bosymcorp.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   $('#ct-who').textContent = ', ' + d.name.trim().split(/\s+/)[0];
   form.hidden = true; done.hidden = false; done.focus();

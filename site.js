@@ -195,3 +195,37 @@ document.addEventListener('error', e => {
   im.dataset.retry = n + 1;
   setTimeout(() => { const u = new URL(im.src); u.searchParams.set('r', n + 1); im.src = u.href; }, 400 * (n + 1));
 }, true);
+
+/* Damped wheel scrolling for a slower, premium feel (mouse and trackpad only).
+   Touch, keyboard, scrollbar drags and reduced-motion users keep native scrolling. */
+(() => {
+  if (!matchMedia('(pointer:fine)').matches || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const root = document.documentElement, TAU = 0.2; // seconds to close ~63% of the gap; higher = slower, softer
+  let y = scrollY, target = y, raf = 0, last = 0;
+  const locked = () => getComputedStyle(document.body).overflowY === 'hidden' || getComputedStyle(root).overflowY === 'hidden';
+  // an inner panel (drawer, filter list, sheet) that can still scroll this way keeps native scrolling
+  const inner = (el, dy) => {
+    for (; el && el !== document.body && el !== root; el = el.parentElement) {
+      const s = getComputedStyle(el).overflowY;
+      if ((s === 'auto' || s === 'scroll') && el.scrollHeight > el.clientHeight + 1 &&
+          (dy > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 1 : el.scrollTop > 0)) return true;
+    }
+    return false;
+  };
+  const step = now => {
+    const dt = Math.min((now - last) / 1000, 0.05); last = now;
+    y += (target - y) * (1 - Math.exp(-dt / TAU));
+    if (Math.abs(target - y) < 0.5) { y = target; raf = 0; } else raf = requestAnimationFrame(step);
+    scrollTo({ top: y, behavior: 'instant' });
+  };
+  addEventListener('wheel', e => {
+    if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY) || locked() || inner(e.target, e.deltaY)) return;
+    e.preventDefault();
+    if (!raf) y = target = scrollY;
+    const d = e.deltaMode === 1 ? e.deltaY * 40 : e.deltaMode === 2 ? e.deltaY * innerHeight : e.deltaY;
+    target = Math.max(0, Math.min(root.scrollHeight - innerHeight, target + d));
+    if (!raf) { last = performance.now(); raf = requestAnimationFrame(step); }
+  }, { passive: false });
+  // keyboard, scrollbar, anchor jumps and scrollIntoView move the page natively: follow them
+  addEventListener('scroll', () => { if (!raf) y = target = scrollY; }, { passive: true });
+})();
